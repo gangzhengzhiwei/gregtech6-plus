@@ -287,16 +287,18 @@ public class Loader_Recipes_Chem implements Runnable {
 		
 		// TODO Sugar + 6 KNO3 -> 9 CO + 3 N2 + 11 H2O + 3 K2CO3 ; (Rocket Candy)
 		
-		for (OreDictMaterial tMat : ANY.Coal.mToThis) if (tMat != MT.Graphene) {
-		RM.Electrolyzer .addRecipe2(T, 16, 6144, OP.blockDust.mat(tMat, 1), OP.dust .mat(MT.Al2O3, 30), FL.array(MT.Na3AlF6.liquid(U24 , T), MT.AlF3.liquid(U12, T)), FL.array(MT.CO2.gas(U *27, F), MT.F.gas(7*U80 , F)), OM.dust(MT.Al, U *12));
-		RM.Electrolyzer .addRecipe2(T, 16, 6144, OP.blockDust.mat(tMat, 1), OP.ingot.mat(MT.Al2O3, 30), FL.array(MT.Na3AlF6.liquid(U24 , T), MT.AlF3.liquid(U12, T)), FL.array(MT.CO2.gas(U *27, F), MT.F.gas(7*U80 , F)), OM.dust(MT.Al, U *12));
-		RM.Electrolyzer .addRecipe2(T, 16, 2048, OP.dust     .mat(tMat, 3), OP.dust .mat(MT.Al2O3, 10), FL.array(MT.Na3AlF6.liquid(U72 , T), MT.AlF3.liquid(U36, T)), FL.array(MT.CO2.gas(U * 9, F), MT.F.gas(7*U240, F)), OM.dust(MT.Al, U * 4));
-		RM.Electrolyzer .addRecipe2(T, 16, 2048, OP.dust     .mat(tMat, 3), OP.ingot.mat(MT.Al2O3, 10), FL.array(MT.Na3AlF6.liquid(U72 , T), MT.AlF3.liquid(U36, T)), FL.array(MT.CO2.gas(U * 9, F), MT.F.gas(7*U240, F)), OM.dust(MT.Al, U * 4));
-		RM.Electrolyzer .addRecipe2(T, 16, 2048, OP.dustTiny .mat(tMat,27), OP.dust .mat(MT.Al2O3, 10), FL.array(MT.Na3AlF6.liquid(U72 , T), MT.AlF3.liquid(U36, T)), FL.array(MT.CO2.gas(U * 9, F), MT.F.gas(7*U240, F)), OM.dust(MT.Al, U * 4));
-		RM.Electrolyzer .addRecipe2(T, 16, 2048, OP.dustTiny .mat(tMat,27), OP.ingot.mat(MT.Al2O3, 10), FL.array(MT.Na3AlF6.liquid(U72 , T), MT.AlF3.liquid(U36, T)), FL.array(MT.CO2.gas(U * 9, F), MT.F.gas(7*U240, F)), OM.dust(MT.Al, U * 4));
-		RM.Electrolyzer .addRecipe2(T, 16, 1024, OP.dustSmall.mat(tMat, 6), OP.dust .mat(MT.Al2O3,  5), FL.array(MT.Na3AlF6.liquid(U144, T), MT.AlF3.liquid(U72, T)), FL.array(MT.CO2.gas(U2* 9, F), MT.F.gas(7*U480, F)), OM.dust(MT.Al, U * 2));
-		RM.Electrolyzer .addRecipe2(T, 16, 1024, OP.dustSmall.mat(tMat, 6), OP.ingot.mat(MT.Al2O3,  5), FL.array(MT.Na3AlF6.liquid(U144, T), MT.AlF3.liquid(U72, T)), FL.array(MT.CO2.gas(U2* 9, F), MT.F.gas(7*U480, F)), OM.dust(MT.Al, U * 2));
-		}
+		//Aluminium
+		RM.Electrolyzer .addRecipe2(T, 44, 6144, OP.blockDust.mat(MT.C, 1), OP.dust .mat(MT.Al2O3, 30), FL.array(MT.Na3AlF6.liquid(U24 , T), MT.AlF3.liquid(U12, T)), FL.array(MT.CO2.gas(U *27, F), MT.F.gas(7*U80 , F)), OM.dust(MT.Al, U *12));
+		RM.Electrolyzer .addRecipe2(T, 44, 6144, OP.blockDust.mat(MT.C, 1), OP.ingot.mat(MT.Al2O3, 30), FL.array(MT.Na3AlF6.liquid(U24 , T), MT.AlF3.liquid(U12, T)), FL.array(MT.CO2.gas(U *27, F), MT.F.gas(7*U80 , F)), OM.dust(MT.Al, U *12));
+		RM.Electrolyzer .addRecipe2(T, 44, 2048, OP.dust     .mat(MT.C, 3), OP.dust .mat(MT.Al2O3, 10), FL.array(MT.Na3AlF6.liquid(U72 , T), MT.AlF3.liquid(U36, T)), FL.array(MT.CO2.gas(U * 9, F), MT.F.gas(7*U240, F)), OM.dust(MT.Al, U * 4));
+		RM.Electrolyzer .addRecipe2(T, 44, 2048, OP.dust     .mat(MT.C, 3), OP.ingot.mat(MT.Al2O3, 10), FL.array(MT.Na3AlF6.liquid(U72 , T), MT.AlF3.liquid(U36, T)), FL.array(MT.CO2.gas(U * 9, F), MT.F.gas(7*U240, F)), OM.dust(MT.Al, U * 4));
+		RM.Electrolyzer .addRecipe2(T, 44, 2048, OP.dustTiny .mat(MT.C,27), OP.dust .mat(MT.Al2O3, 10), FL.array(MT.Na3AlF6.liquid(U72 , T), MT.AlF3.liquid(U36, T)), FL.array(MT.CO2.gas(U * 9, F), MT.F.gas(7*U240, F)), OM.dust(MT.Al, U * 4));
+		RM.Electrolyzer .addRecipe2(T, 44, 2048, OP.dustTiny .mat(MT.C,27), OP.ingot.mat(MT.Al2O3, 10), FL.array(MT.Na3AlF6.liquid(U72 , T), MT.AlF3.liquid(U36, T)), FL.array(MT.CO2.gas(U * 9, F), MT.F.gas(7*U240, F)), OM.dust(MT.Al, U * 4));
+		RM.Electrolyzer .addRecipe2(T, 44, 1024, OP.dustSmall.mat(MT.C, 6), OP.dust .mat(MT.Al2O3,  5), FL.array(MT.Na3AlF6.liquid(U144, T), MT.AlF3.liquid(U72, T)), FL.array(MT.CO2.gas(U2* 9, F), MT.F.gas(7*U480, F)), OM.dust(MT.Al, U * 2));
+		RM.Electrolyzer .addRecipe2(T, 44, 1024, OP.dustSmall.mat(MT.C, 6), OP.ingot.mat(MT.Al2O3,  5), FL.array(MT.Na3AlF6.liquid(U144, T), MT.AlF3.liquid(U72, T)), FL.array(MT.CO2.gas(U2* 9, F), MT.F.gas(7*U480, F)), OM.dust(MT.Al, U * 2));
+		//Advanced aluminium
+		RM.Electrolyzer .addRecipe1(T,352, 1024, OP.dust .mat(MT.Al2O3,  5), NF, MT.O.liquid(U*3 , T), OM.dust(MT.Al, U * 2));
+
 		RM.Electrolyzer .addRecipe2(T, 16,  512, ST.tag(0), OM.dust(MT.NaHSO4, U*7), NF, MT.H .gas(U  , T), OM.dust(MT.NaSO4, U*6));
 		RM.Electrolyzer .addRecipe2(T, 16,  512, ST.tag(0), OM.dust(MT.KHSO4 , U*7), NF, MT.H .gas(U  , T), OM.dust(MT.KSO4 , U*6));
 		RM.Electrolyzer .addRecipe2(T, 64, 1024, ST.tag(0), OM.dust(MT.CaCl2 , U*3), NF, MT.Cl.gas(U*2, T), OM.dust(MT.Ca   , U));
