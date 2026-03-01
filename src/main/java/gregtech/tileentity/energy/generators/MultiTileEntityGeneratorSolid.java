@@ -51,7 +51,7 @@ import static gregapi.data.CS.*;
  * @author Gregorius Techneticies
  */
 public abstract class MultiTileEntityGeneratorSolid extends TileEntityBase09FacingSingle implements ITileEntityEnergy, ITileEntityRunningActively, IMTE_GetCollisionBoundingBoxFromPool, IMTE_OnEntityCollidedWithBlock {
-	private static int FLAME_RANGE = 3;
+	private static int FLAME_RANGE = 1;
 	
 	protected short mEfficiency = 10000;
 	protected long mEnergy = 0, mRate = 1;

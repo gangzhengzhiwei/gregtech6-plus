@@ -1,7 +1,8 @@
 This is the most recent Changelog. It also contains some of the changes inside the >>>UPCOMING<<< Versions (most of the time). This is for 1.7.10 btw.
 
-6.0.3-vd2: (Not released yet) Original gregtech-6.17.07
+6.0.3-vd2: Original gregtech-6.17.07
 [FIXED] I accidentally disabled the dye fiber. Now it is force generated.
+[CHANGED] Burning Boxes' Flame range is now down to 2m.
 [CHANGED] Dense plate is cheaper. Now it only worth 4 unit. Just compress a quadruple plate. And the Reinforced Machine Casings has been replaced by Dense Machine Casing.
 [ADDED] Wool can be separated into strings in loom.
 [ADDED] Thin plastic plate now can be changed into strings in loom, with lot of time.

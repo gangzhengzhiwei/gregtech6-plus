@@ -63,7 +63,7 @@ import net.minecraftforge.fluids.IFluidTank;
  * @author Gregorius Techneticies
  */
 public class MultiTileEntityGeneratorHotFluid extends TileEntityBase09FacingSingle implements IFluidHandler, ITileEntityTapAccessible, ITileEntityFunnelAccessible, ITileEntityEnergy, ITileEntityRunningActively, IMTE_GetCollisionBoundingBoxFromPool, IMTE_OnEntityCollidedWithBlock {
-	private static int FLAME_RANGE = 2;
+	private static int FLAME_RANGE = 1;
 	
 	public short mEfficiency = 10000;
 	public long mEnergy = 0, mRate = 1;

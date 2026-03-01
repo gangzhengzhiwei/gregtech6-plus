@@ -61,7 +61,7 @@ import net.minecraftforge.fluids.IFluidTank;
  * @author Gregorius Techneticies
  */
 public class MultiTileEntityGeneratorLiquid extends TileEntityBase09FacingSingle implements IFluidHandler, ITileEntityTapAccessible, ITileEntityEnergy, ITileEntityRunningActively, IMTE_GetCollisionBoundingBoxFromPool, IMTE_OnEntityCollidedWithBlock {
-	private static int FLAME_RANGE = 2;
+	private static int FLAME_RANGE = 1;
 	
 	protected byte mCooldown = 0;
 	protected short mEfficiency = 10000;
