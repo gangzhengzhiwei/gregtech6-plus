@@ -216,19 +216,11 @@ public class Loader_Recipes_Handlers implements Runnable {
 		
 		RM.Compressor           .add(new RecipeMapHandlerPrefix(dust                            , 1, NF,  16, 0,   256, NF, plateGem        , 1, NI, NI, T, F, F, new Nor(gemLegendary, gemExquisite, gemFlawless, bouleGt, MT.Ice, ANTIMATTER, LAYERED, COATED, tEasyWorkable)));
 		RM.Compressor           .add(new RecipeMapHandlerPrefix(plateQuadruple                  , 1, NF,  16, 0,   256, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable.NOT)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(plate                           , 9, NF,  16, 0,   256, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable.NOT)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(plateTriple                     , 3, NF,  16, 0,   256, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable.NOT)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(blockPlate                      , 1, NF,  16, 0,   256, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable.NOT)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(blockSolid                      , 1, NF,  16, 0,   256, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable.NOT)));
 		RM.Compressor           .add(new RecipeMapHandlerPrefix(ingot                           , 1, NF,  16, 0,   256, NF, compressed      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable.NOT)));
 		RM.Compressor           .add(new RecipeMapHandlerPrefix(billet                          , 1, NF,  16, 0,   256, NF, plateSteamcraft , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable.NOT)));
 		
 		RM.Compressor           .add(new RecipeMapHandlerPrefix(dust                            , 1, NF,  16, 16   , 0, NF, plateGem        , 1, NI, NI, T, F, F, new Nor(gemLegendary, gemExquisite, gemFlawless, bouleGt, MT.Ice, ANTIMATTER, LAYERED, COATED, tEasyWorkable.NOT)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(compressed                      , 9, NF,  16, 16* 9, 0, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(plate                           , 9, NF,  16, 16* 9, 0, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(plateTriple                     , 3, NF,  16, 16* 9, 0, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(blockPlate                      , 1, NF,  16, 16* 9, 0, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable)));
-		RM.Compressor           .add(new RecipeMapHandlerPrefix(blockSolid                      , 1, NF,  16, 16* 9, 0, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable)));
+		RM.Compressor           .add(new RecipeMapHandlerPrefix(plateQuadruple                  , 1, NF,  16, 256  , 0, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable)));
 		RM.Compressor           .add(new RecipeMapHandlerPrefix(ingot                           , 1, NF,  16, 16   , 0, NF, compressed      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable)));
 		RM.Compressor           .add(new RecipeMapHandlerPrefix(billet                          , 1, NF,  16, 32/ 3, 0, NF, plateSteamcraft , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, tEasyWorkable)));
 		
@@ -266,7 +258,8 @@ public class Loader_Recipes_Handlers implements Runnable {
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(ingotTriple                     , 1, NF,  16, 0,   256, NF, plateTriple     , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(ingotQuadruple                  , 1, NF,  16, 0,   256, NF, plateQuadruple  , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(ingotQuintuple                  , 1, NF,  16, 0,   256, NF, plateQuintuple  , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
-		RM.RollingMill          .add(new RecipeMapHandlerPrefix(blockSolid                      , 1, NF,  16, 0,   256, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
+		RM.RollingMill          .add(new RecipeMapHandlerPrefix(blockSolid                      , 4, NF,  16, 0, 256*8, NF, plateDense      , 9, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
+		RM.RollingMill          .add(new RecipeMapHandlerPrefix(blockPlate                      , 4, NF,  16, 0,256*10, NF, plateDense      , 9, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(compressed                      , 1, NF,  16, 0,   256, NF, plate           , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(plateCurved                     , 1, NF,  16, 0,   256, NF, plate           , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(plate                           , 1, NF,  16, 0,   256, NF, sheetGt         , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable.NOT)));
@@ -278,7 +271,8 @@ public class Loader_Recipes_Handlers implements Runnable {
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(ingotTriple                     , 1, NF,  16, 16* 3, 0, NF, plateTriple     , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(ingotQuadruple                  , 1, NF,  16, 16* 4, 0, NF, plateQuadruple  , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(ingotQuintuple                  , 1, NF,  16, 16* 5, 0, NF, plateQuintuple  , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
-		RM.RollingMill          .add(new RecipeMapHandlerPrefix(blockSolid                      , 1, NF,  16, 16* 9, 0, NF, plateDense      , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
+		RM.RollingMill          .add(new RecipeMapHandlerPrefix(blockSolid                      , 4, NF,  16, 256*8, 0, NF, plateDense      , 9, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
+		RM.RollingMill          .add(new RecipeMapHandlerPrefix(blockPlate                      , 4, NF,  16,256*10, 0, NF, plateDense      , 9, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(compressed                      , 1, NF,  16, 16   , 0, NF, plate           , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(plateCurved                     , 1, NF,  16, 16   , 0, NF, plate           , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
 		RM.RollingMill          .add(new RecipeMapHandlerPrefix(plate                           , 1, NF,  16, 16   , 0, NF, sheetGt         , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE, tEasyWorkable)));
