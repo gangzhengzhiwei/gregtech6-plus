@@ -74,7 +74,7 @@ import static gregapi.data.CS.*;
  */
 public class MultiTileEntitySmeltery extends TileEntityBase07Paintable implements ITileEntityCrucible, ITileEntityEnergy, ITileEntityGibbl, ITileEntityWeight, ITileEntityTemperature, ITileEntityMold, ITileEntityServerTickPost, IMTE_RemovedByPlayer, IMTE_OnEntityCollidedWithBlock, IMTE_GetCollisionBoundingBoxFromPool, IMTE_AddToolTips, IMTE_OnPlaced {
 	public static int GAS_RANGE = 3, FLAME_RANGE = 3;
-	public static long MAX_AMOUNT = 16*U, KG_PER_ENERGY = 100, LOSS_PER_TICK = 4;
+	public static long MAX_AMOUNT = 16*U, KG_PER_ENERGY = 100, HEAT_LOSS_FACTOR = 1;
 	public static double HEAT_RESISTANCE_BONUS = 1.25;
 	
 	protected boolean mAcidProof = F, mMeltDown = F;
@@ -298,9 +298,8 @@ public class MultiTileEntitySmeltery extends TileEntityBase07Paintable implement
 		mDisplayedHeight = (byte)UT.Code.scale(tTotal, MAX_AMOUNT, 255, F);
 		mDisplayedFluid = (tLightest == null || tLightest.mMaterial.mMeltingPoint > mTemperature ? -1 : tLightest.mMaterial.mID);
 
-		long tRequiredEnergy = 1 + (long)(tWeight / KG_PER_ENERGY), tConversions;
-		if (mTemperature > tTemperature) mEnergy -= LOSS_PER_TICK;
-		else mEnergy += LOSS_PER_TICK;
+		long tRequiredEnergy = 1 + (long)(tWeight / KG_PER_ENERGY), tHeatLoss = Math.round((double)(mTemperature - tTemperature) / 175), tConversions;
+		mEnergy -= HEAT_LOSS_FACTOR * tHeatLoss;
 		tConversions = mEnergy / tRequiredEnergy;
 		mEnergy -= tConversions * tRequiredEnergy;
 		mTemperature += tConversions;
@@ -345,7 +344,6 @@ public class MultiTileEntitySmeltery extends TileEntityBase07Paintable implement
 		}
 		return F;
 	}
-	
 	@Override
 	public long getTemperatureValue(byte aSide) {
 		return mTemperature;

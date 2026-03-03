@@ -76,7 +76,7 @@ import static gregapi.data.CS.*;
  */
 public class MultiTileEntityCrucible extends TileEntityBase10MultiBlockBase implements ITileEntityCrucible, ITileEntityEnergy, ITileEntityGibbl, ITileEntityWeight, ITileEntityTemperature, ITileEntityMold, ITileEntityServerTickPost, ITileEntityEnergyDataCapacitor, IMultiBlockEnergy, IMultiBlockInventory, IMultiBlockFluidHandler, IFluidHandler {
 	public static int GAS_RANGE = 5, FLAME_RANGE = 5;
-	public static long MAX_AMOUNT = 16*3*3*3*U, KG_PER_ENERGY = 100, LOSS_PER_TICK = 32;
+	public static long MAX_AMOUNT = 16*3*3*3*U, KG_PER_ENERGY = 100, HEAT_LOSS_FACTOR = 8;
 	public static double HEAT_RESISTANCE_BONUS = 1.10;
 	
 	protected boolean mAcidProof = F, mMeltDown = F;
@@ -349,10 +349,9 @@ public class MultiTileEntityCrucible extends TileEntityBase10MultiBlockBase impl
 		mDisplayedHeight = (byte)UT.Code.scale(tTotal, MAX_AMOUNT, 255, F);
 		mDisplayedFluid = (tLightest == null || tLightest.mMaterial.mMeltingPoint > mTemperature ? -1 : tLightest.mMaterial.mID);
 		if (mDisplayedFluid != tDisplayedFluid || mDisplayedHeight != tDisplayedHeight) updateClientData();
-		
-		long tRequiredEnergy = 1 + (long)(tWeight / KG_PER_ENERGY), tConversions;
-		if (mTemperature > tTemperature) mEnergy -= LOSS_PER_TICK;
-		else mEnergy += LOSS_PER_TICK;
+
+		long tRequiredEnergy = 1 + (long)(tWeight / KG_PER_ENERGY), tHeatLoss = Math.round((double)(mTemperature - tTemperature) / 175), tConversions;
+		mEnergy -= HEAT_LOSS_FACTOR * tHeatLoss;
 		tConversions = mEnergy / tRequiredEnergy;
 		mEnergy -= tConversions * tRequiredEnergy;
 		mTemperature += tConversions;

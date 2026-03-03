@@ -1,5 +1,8 @@
 This is the most recent Changelog. It also contains some of the changes inside the >>>UPCOMING<<< Versions (most of the time). This is for 1.7.10 btw.
 
+6.0.4-vd2: (Not released yet)
+[CHANGED] Crucibles heat loss now only depends on temperature difference.
+
 6.0.3-vd2: Original gregtech-6.17.07
 [FIXED] I accidentally disabled the dye fiber. Now it is force generated.
 [CHANGED] Burning Boxes' Flame range is now down to 2m.
