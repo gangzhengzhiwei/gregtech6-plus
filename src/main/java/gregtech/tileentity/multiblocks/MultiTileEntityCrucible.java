@@ -351,6 +351,10 @@ public class MultiTileEntityCrucible extends TileEntityBase10MultiBlockBase impl
 		if (mDisplayedFluid != tDisplayedFluid || mDisplayedHeight != tDisplayedHeight) updateClientData();
 
 		long tRequiredEnergy = 1 + (long)(tWeight / KG_PER_ENERGY), tHeatLoss = Math.round((double)(mTemperature - tTemperature) / 175), tConversions;
+		if (mTemperature != tTemperature && tHeatLoss == 0) {
+			if (mTemperature - tTemperature > 0) tHeatLoss = 1;
+			else tHeatLoss = -1;
+		}
 		mEnergy -= HEAT_LOSS_FACTOR * tHeatLoss;
 		tConversions = mEnergy / tRequiredEnergy;
 		mEnergy -= tConversions * tRequiredEnergy;
