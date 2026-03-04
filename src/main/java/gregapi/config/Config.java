@@ -104,7 +104,7 @@ public class Config implements Runnable {
 	
 	public boolean get(Object aCategory, String aName, boolean aDefault) {
 		if (UT.Code.stringInvalid(aName)) return aDefault;
-		Property tProperty = mConfig.get(aCategory.toString().replaceAll("\\|", "_"), (aName+(mUsesDefaultsInNames?"_"+aDefault:"")).replaceAll("\\|", "_"), aDefault);
+		Property tProperty = mConfig.get(aCategory.toString().replaceAll("\\|", "_"), (aName+(mUsesDefaultsInNames?"_DEFAULT_"+aDefault:"")).replaceAll("\\|", "_"), aDefault);
 		boolean rResult = tProperty.getBoolean(aDefault);
 		if (Abstract_Mod.sFinalized >= Abstract_Mod.sModCountUsingGTAPI && mSaveOnEdit && !tProperty.wasRead()) mConfig.save();
 		return rResult;

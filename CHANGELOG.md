@@ -1,9 +1,11 @@
 This is the most recent Changelog. It also contains some of the changes inside the >>>UPCOMING<<< Versions (most of the time). This is for 1.7.10 btw.
 
 6.0.4-vd2: (Not released yet)
+[ADDED] Print_Missing_I18n_Key config in client.cfg, default is false. Gregtech will print missing i18n key of language file in gregtech.log.
 [CHANGED] Crucibles heat loss now only depends on temperature difference.
 [CHANGED] gregtech.cfg in version folder is now obsoleted, it has been moved to config/gregtech/client.cfg
 [CHANGED] Now you can put your language file in config/gregtech/lang. Still, you need to restart game after change language.
+[CHANGED] Some config has changed their names. And recipes config has been moved to config/gregtech/recipes.
 
 6.0.3-vd2: Original gregtech-6.17.07
 [FIXED] I accidentally disabled the dye fiber. Now it is force generated.

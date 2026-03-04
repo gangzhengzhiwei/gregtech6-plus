@@ -155,6 +155,17 @@ public class LanguageHandler {
 		}
 		return aStack.getUnlocalizedName() + ".name";
 	}
+	/** Print missing language key ,compared to BACKUPMAP. Debug use only **/
+	public static void printMissingI18nKey() {
+		if (!sUseFile) return;
+		for (String tKey : BACKUPMAP.keySet()) {
+			String rTranslation = LanguageRegistry.instance().getStringLocalization(tKey);
+			if (UT.Code.stringValid(rTranslation) && !tKey.equals(rTranslation)) continue;
+			rTranslation = StatCollector.translateToLocal(tKey);
+			if (UT.Code.stringValid(rTranslation) && !tKey.equals(rTranslation)) continue;
+			OUT.println("Language: " + sLangFileLanguage + " Missing key: "+ tKey);
+		}
+	}
 	
 	public static String getLocalName(OreDictPrefix aPrefix, OreDictMaterial aMaterial) {
 		// Certain Materials have slightly different default Localisations.
