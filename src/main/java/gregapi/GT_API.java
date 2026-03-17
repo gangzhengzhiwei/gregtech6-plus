@@ -359,7 +359,6 @@ public class GT_API extends Abstract_Mod {
 		D3                        = ConfigsGT.CLIENT.get(ConfigCategories.debug  , "misc_logs"               , F);
 		EXPERIMENTS               = ConfigsGT.CLIENT.get(ConfigCategories.debug  , "experiments"        , F);
 		CLIENT_BLOCKUPDATE_SOUNDS = ConfigsGT.CLIENT.get(ConfigCategories.debug  , "block_update_sounds", F);
-		PRINT_MISSING_I18N_KEY = ConfigsGT.CLIENT.get(ConfigCategories.debug  , "print_missing_language_key", F);
 		if ( ConfigsGT.CLIENT.get(ConfigCategories.debug, "april_fools"  , F)) APRIL_FOOLS = T;
 		if ( ConfigsGT.CLIENT.get(ConfigCategories.debug, "xmas_july"    , F)) XMAS_IN_JULY = T;
 		if ( ConfigsGT.CLIENT.get(ConfigCategories.debug, "xmas_december", F)) XMAS_IN_DECEMBER = T;
@@ -837,7 +836,6 @@ public class GT_API extends Abstract_Mod {
 		
 		// Saving the Lang File.
 		LanguageHandler.save();
-		if (PRINT_MISSING_I18N_KEY) LanguageHandler.printMissingI18nKey();
 		
 		if (mPlayerLogger != null) new Thread(mPlayerLogger).start();
 		

@@ -20,10 +20,7 @@
 package gregapi.lang;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import gregapi.data.ANY;
-import gregapi.data.MT;
-import gregapi.data.OP;
-import gregapi.data.TD;
+import gregapi.data.*;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.oredict.OreDictPrefix;
 import gregapi.util.ST;
@@ -80,8 +77,6 @@ public class LanguageHandler {
 					Property tProperty = sLangFile.get("LanguageFile", tEntry.getKey(), tEntry.getValue());
 					TEMPMAP.put(tEntry.getKey()        , sUseFile?tProperty.getString():tEntry.getValue());
 					TEMPMAP.put(tEntry.getKey()+".name", sUseFile?tProperty.getString():tEntry.getValue());
-					LanguageRegistry.instance().injectLanguage(sLangFileLanguage, TEMPMAP);
-					TEMPMAP.clear();
 				}
 				BUFFERMAP.clear();
 			}
@@ -94,7 +89,7 @@ public class LanguageHandler {
 		}
 		if (tSave && mWritingEnabled) sLangFile.save();
 	}
-	
+
 	public static String get(String aKey, String aDefault) {
 		add(aKey, aDefault);
 		return translate(aKey, aDefault);
@@ -155,18 +150,7 @@ public class LanguageHandler {
 		}
 		return aStack.getUnlocalizedName() + ".name";
 	}
-	/** Print missing language key ,compared to BACKUPMAP. Debug use only **/
-	public static void printMissingI18nKey() {
-		if (!sUseFile) return;
-		for (String tKey : BACKUPMAP.keySet()) {
-			String rTranslation = LanguageRegistry.instance().getStringLocalization(tKey);
-			if (UT.Code.stringValid(rTranslation) && !tKey.equals(rTranslation)) continue;
-			rTranslation = StatCollector.translateToLocal(tKey);
-			if (UT.Code.stringValid(rTranslation) && !tKey.equals(rTranslation)) continue;
-			OUT.println("Language: " + sLangFileLanguage + " Missing key: "+ tKey);
-		}
-	}
-	
+
 	public static String getLocalName(OreDictPrefix aPrefix, OreDictMaterial aMaterial) {
 		// Certain Materials have slightly different default Localisations.
 		if (aPrefix == OP.crateGtRaw      || aPrefix == OP.crateGt64Raw      || aPrefix == OP.blockRaw     ) return aPrefix.mMaterialPre + getLocalName(OP.ore     , aMaterial);
