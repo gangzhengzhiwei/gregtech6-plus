@@ -84,12 +84,7 @@ import static gregapi.data.CS.*;
  */
 public class MultiTileEntityMold extends TileEntityBase07Paintable implements ITileEntityEnergy, IFluidHandler, ITileEntityTemperature, ITileEntityMold, ITileEntityServerTickPost, IMTE_SetBlockBoundsBasedOnState, IMTE_OnEntityCollidedWithBlock, IMTE_GetCollisionBoundingBoxFromPool, IMTE_GetSelectedBoundingBoxFromPool, IMTE_AddToolTips, IMTE_OnPlaced {
 	public static double HEAT_RESISTANCE_BONUS = 1.25;
-	private static final int GUI_ID_MOLD_SELECTION = 1;
-	
 	public static final Map<Integer, OreDictPrefix> MOLD_RECIPES = new HashMap<>();
-	private static int[] MOLD_GUI_SHAPES = ZL_INTEGER;
-	private final Map<String, Integer> mPendingMoldSelections = new HashMap<>();
-	private final Map<String, Integer> mPendingMoldToolSlots = new HashMap<>();
 	
 	public OreDictPrefix getMoldRecipe(int aShape) {
 		if (aShape == 0) return null;
@@ -97,86 +92,6 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 		return rRecipe == null ? OP.nugget : rRecipe;
 	}
 
-	private OreDictPrefix getMoldRecipeExact(int aShape) {
-		if (aShape == 0) return null;
-		return MOLD_RECIPES.get(aShape & (B[25]-1));
-	}
-
-	private int getSelectedMoldGUIIndex() {
-		return getMoldGUIIndexForShape(mShape);
-	}
-
-	private int getMoldGUIIndexForShape(int aShape) {
-		if (MOLD_GUI_SHAPES.length <= 1) return 0;
-		OreDictPrefix tCurrentPrefix = getMoldRecipeExact(aShape);
-		if (tCurrentPrefix == null) return 0;
-		for (int i = 1; i < MOLD_GUI_SHAPES.length; i++) {
-			OreDictPrefix tPrefix = getMoldRecipeExact(MOLD_GUI_SHAPES[i]);
-			if (tPrefix == tCurrentPrefix) return i;
-		}
-		return 0;
-	}
-
-	private int getMoldShapeByGUIIndex(int aIndex) {
-		if (MOLD_GUI_SHAPES.length <= 1) return 0;
-		int tIndex = Math.max(0, Math.min(MOLD_GUI_SHAPES.length - 1, aIndex));
-		return MOLD_GUI_SHAPES[tIndex];
-	}
-
-	private int getMoldShapeByDelta(int aCurrentShape, int aDelta) {
-		if (MOLD_GUI_SHAPES.length <= 1) return 0;
-		int tIndex = (getMoldGUIIndexForShape(aCurrentShape) + aDelta) % MOLD_GUI_SHAPES.length;
-		if (tIndex < 0) tIndex += MOLD_GUI_SHAPES.length;
-		return getMoldShapeByGUIIndex(tIndex);
-	}
-
-	private void selectMoldByGUIIndex(int aIndex) {
-		mShape = getMoldShapeByGUIIndex(aIndex);
-		updateClientData();
-	}
-
-	private void cycleMoldSelection(int aDelta) {
-		mShape = getMoldShapeByDelta(mShape, aDelta);
-		updateClientData();
-	}
-
-	private int getPendingMoldShape(EntityPlayer aPlayer) {
-		if (aPlayer == null) return mShape;
-		Integer tPendingShape = mPendingMoldSelections.get(aPlayer.getCommandSenderName());
-		return tPendingShape == null ? mShape : tPendingShape;
-	}
-
-	private void setPendingMoldShape(EntityPlayer aPlayer, int aShape) {
-		if (aPlayer != null) mPendingMoldSelections.put(aPlayer.getCommandSenderName(), aShape);
-	}
-
-	private void clearPendingMoldShape(EntityPlayer aPlayer) {
-		if (aPlayer != null) mPendingMoldSelections.remove(aPlayer.getCommandSenderName());
-	}
-
-	private void setPendingMoldToolSlot(EntityPlayer aPlayer, int aSlot) {
-		if (aPlayer != null) mPendingMoldToolSlots.put(aPlayer.getCommandSenderName(), aSlot);
-	}
-
-	private int getPendingMoldToolSlot(EntityPlayer aPlayer) {
-		if (aPlayer == null) return -1;
-		Integer tSlot = mPendingMoldToolSlots.get(aPlayer.getCommandSenderName());
-		return tSlot == null ? -1 : tSlot;
-	}
-
-	private void clearPendingMoldToolSlot(EntityPlayer aPlayer) {
-		if (aPlayer != null) mPendingMoldToolSlots.remove(aPlayer.getCommandSenderName());
-	}
-
-	private void consumePendingMoldChiselDurability(EntityPlayer aPlayer) {
-		int tSlot = getPendingMoldToolSlot(aPlayer);
-		if (tSlot < 0 || tSlot >= aPlayer.inventory.mainInventory.length) return;
-		ItemStack tToolStack = aPlayer.inventory.mainInventory[tSlot];
-		if (!ToolsGT.contains(TOOL_chisel, tToolStack) || !tToolStack.isItemStackDamageable()) return;
-		tToolStack.damageItem(4, aPlayer);
-		if (tToolStack.getItemDamage() >= tToolStack.getMaxDamage()) ST.use(aPlayer, tToolStack);
-	}
-	
 	protected boolean mAcidProof = F, mUseRedstone = F;
 	protected byte mAutoPullDirections = 0;
 	protected short mDisplay = 0;
@@ -220,7 +135,6 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 		else
 		aList.add(Chat.CYAN     + LH.get(LH.RECIPES_MOLD) + " " + getMoldRecipe(mShape).mNameLocal + Chat._WHITE + UT.Code.displayUnits(getMoldRequiredMaterialUnits()) + " Units");
 		aList.add(Chat.ORANGE   + LH.get(LH.NO_GUI_CLICK_TO_INTERACT)   + " (" + LH.get(LH.FACE_TOP) + ")");
-		aList.add(Chat.DGRAY    + "Sneak + Chisel Rightclick: Select Mold Type");
 		if (mAcidProof) aList.add(Chat.ORANGE + LH.get(LH.TOOLTIP_ACIDPROOF));
 		aList.add(Chat.DRED     + LH.get(LH.HAZARD_MELTDOWN) + " (" + getMoldMaxTemperature() + " K)");
 		aList.add(Chat.DRED     + LH.get(LH.HAZARD_CONTACT));
@@ -421,11 +335,6 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 	public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide, float aHitX, float aHitY, float aHitZ) {
 		if (isClientSide()) return super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
 		if (aTool.equals(TOOL_thermometer)) {if (aChatReturn != null) aChatReturn.add("Temperature: " + mTemperature + "K"); return 10000;}
-		if (aTool.equals(TOOL_chisel) && aSneaking && mContent == null && slot(0) == null && aPlayer instanceof EntityPlayer) {
-			setPendingMoldToolSlot((EntityPlayer)aPlayer, ((EntityPlayer)aPlayer).inventory.currentItem);
-			openGUI((EntityPlayer)aPlayer, GUI_ID_MOLD_SELECTION);
-			return 10000;
-		}
 		if (aTool.equals(TOOL_chisel) && mContent == null && slot(0) == null && aHitX > PX_P[2] && aHitX < PX_N[2] && aHitZ > PX_P[2] && aHitZ < PX_N[2]) {
 			int tBit = B[((int)(5 * (aHitX - PX_P[2]) / PX_P[12]))*5+(int)(5 * (aHitZ - PX_P[2]) / PX_P[12])];
 			if ((mShape & tBit) == 0) {
@@ -505,110 +414,6 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 			return 10000;
 		}
 		return super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public Object getGUIClient2(int aGUIID, EntityPlayer aPlayer) {
-		return aGUIID == GUI_ID_MOLD_SELECTION ? new MultiTileEntityGUIClientMoldSelector(aPlayer.inventory, this, aGUIID) : super.getGUIClient2(aGUIID, aPlayer);
-	}
-
-	@Override
-	public Object getGUIServer2(int aGUIID, EntityPlayer aPlayer) {
-		if (aGUIID == GUI_ID_MOLD_SELECTION) setPendingMoldShape(aPlayer, mShape);
-		return aGUIID == GUI_ID_MOLD_SELECTION ? new MultiTileEntityGUICommonMoldSelector(aPlayer.inventory, this, aGUIID) : super.getGUIServer2(aGUIID, aPlayer);
-	}
-
-	@Override
-	public boolean interceptClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {
-		if (aGUIID != GUI_ID_MOLD_SELECTION) return super.interceptClick(aGUIID, aSlot, aSlotIndex, aInvSlot, aPlayer, aShiftclick, aRightclick, aMouse, aShift);
-		return aSlotIndex >= 0 && aSlotIndex <= 2;
-	}
-
-	@Override
-	public ItemStack slotClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {
-		if (aGUIID != GUI_ID_MOLD_SELECTION) return super.slotClick(aGUIID, aSlot, aSlotIndex, aInvSlot, aPlayer, aShiftclick, aRightclick, aMouse, aShift);
-		if (mContent != null || slot(0) != null) return null;
-		int tPendingShape = getPendingMoldShape(aPlayer);
-		switch (aSlotIndex) {
-		case 0:
-			setPendingMoldShape(aPlayer, getMoldShapeByDelta(tPendingShape, -1));
-			break;
-		case 1:
-			setPendingMoldShape(aPlayer, getMoldShapeByDelta(tPendingShape, +1));
-			break;
-		case 2:
-			boolean tShapeChanged = mShape != tPendingShape;
-			mShape = tPendingShape;
-			if (tShapeChanged) consumePendingMoldChiselDurability(aPlayer);
-			clearPendingMoldShape(aPlayer);
-			clearPendingMoldToolSlot(aPlayer);
-			updateClientData();
-			aPlayer.closeScreen();
-			break;
-		}
-		return null;
-	}
-
-	public class MultiTileEntityGUICommonMoldSelector extends ContainerCommon {
-		public MultiTileEntityGUICommonMoldSelector(InventoryPlayer aInventoryPlayer, MultiTileEntityMold aTileEntity, int aGUIID) {
-			super(aInventoryPlayer, aTileEntity, aGUIID);
-		}
-
-		@Override
-		public int addSlots(InventoryPlayer aInventoryPlayer) {
-			addSlotToContainer(new Slot_Holo(mTileEntity, 0, 62, 53, F, F, 1).setTooltip("Previous Mold Type", LH.Chat.WHITE));
-			addSlotToContainer(new Slot_Holo(mTileEntity, 0, 80, 53, F, F, 1).setTooltip("Next Mold Type", LH.Chat.WHITE));
-			addSlotToContainer(new Slot_Holo(mTileEntity, 0, 98, 53, F, F, 1).setTooltip("Apply & Close", LH.Chat.WHITE));
-			return 84;
-		}
-
-		@Override
-		public void onContainerClosed(EntityPlayer aPlayer) {
-			super.onContainerClosed(aPlayer);
-			clearPendingMoldShape(aPlayer);
-			clearPendingMoldToolSlot(aPlayer);
-		}
-
-		@Override public int getSlotCount() {return 0;}
-		@Override public int getShiftClickSlotCount() {return 0;}
-	}
-
-	@SideOnly(Side.CLIENT)
-	public class MultiTileEntityGUIClientMoldSelector extends ContainerClient {
-		private int mDisplayShape;
-
-		public MultiTileEntityGUIClientMoldSelector(InventoryPlayer aInventoryPlayer, MultiTileEntityMold aTileEntity, int aGUIID) {
-			super(new MultiTileEntityGUICommonMoldSelector(aInventoryPlayer, aTileEntity, aGUIID), RES_PATH_GUI + "machines/MoldSelector.png");
-			mDisplayShape = aTileEntity.mShape;
-		}
-
-		@Override
-		protected void handleMouseClick(Slot aSlot, int aSlotIndex, int aMouseButton, int aShiftHeld) {
-			if (aSlot != null && aSlot.slotNumber >= 0 && aSlot.slotNumber <= 2) {
-				switch (aSlot.slotNumber) {
-				case 0:
-					mDisplayShape = getMoldShapeByDelta(mDisplayShape, -1);
-					break;
-				case 1:
-					mDisplayShape = getMoldShapeByDelta(mDisplayShape, +1);
-					break;
-				}
-			}
-			super.handleMouseClick(aSlot, aSlotIndex, aMouseButton, aShiftHeld);
-		}
-
-		@Override
-		protected void drawGuiContainerForegroundLayer(int aMouseX, int aMouseY) {
-			fontRendererObj.drawString("Mold Type Selector", 8, 6, 4210752);
-			OreDictPrefix tRecipe = getMoldRecipeExact(mDisplayShape);
-			String tName = mDisplayShape == 0 ? "Empty / Custom Shape" : tRecipe == null ? "Custom Pattern" : tRecipe.mNameLocal;
-			fontRendererObj.drawString("Current:", 8, 22, 4210752);
-			fontRendererObj.drawString(tName, 8, 33, 4210752);
-			fontRendererObj.drawString("<", 67, 58, 4210752);
-			fontRendererObj.drawString(">", 85, 58, 4210752);
-			fontRendererObj.drawString("OK", 99, 58, 4210752);
-		}
 	}
 	
 	@Override
@@ -1137,8 +942,5 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 				return aFirst.mNameLocal.compareTo(aSecond.mNameLocal);
 			}
 		});
-		MOLD_GUI_SHAPES = new int[tPrefixes.size() + 1];
-		MOLD_GUI_SHAPES[0] = 0;
-		for (int i = 0; i < tPrefixes.size(); i++) MOLD_GUI_SHAPES[i + 1] = tRepresentatives.get(tPrefixes.get(i));
 	}
 }

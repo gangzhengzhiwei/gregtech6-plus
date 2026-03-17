@@ -65,7 +65,7 @@ public class ContainerCommon extends Container {
 	}
 	
 	/**
-	 * To add the Slots to your GUI
+	 * To add the Slots to your GUI. Carefully to override. It runs before child class init.
 	 */
 	public int addSlots(InventoryPlayer aPlayerInventory) {
 		int i = mOffset;

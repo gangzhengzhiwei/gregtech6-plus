@@ -22,10 +22,10 @@ public class GTWailaUtils {
         LH.add("gt.waila.barrel.0", "Contain: %s");
         LH.add("gt.waila.barrel.1", "Auto output: §cDisabled");
         LH.add("gt.waila.barrel.2", "Auto output: §bEnabled");
-        LH.add("gt.waila.smeltery.0", "Temperature:§f %d / %d §bK");
+        LH.add("gt.waila.smeltery.0", "Temperature:§f %d/%d §bK");
         LH.add("gt.waila.smeltery.1", "Content:§f ");
-        LH.add("gt.waila.smeltery.2", "%s §bUnit §f%s");
-        LH.add("gt.waila.smeltery.3", "Total:§f %s / %d §bUnit");
+        LH.add("gt.waila.smeltery.2", "%s§bUnit§f%s ");
+        LH.add("gt.waila.smeltery.3", "Total:§f %s/%d §bUnit");
         LH.add("gt.waila.smeltery.4", "Hidden item:§f %s %s");
         LH.add("gt.waila.smeltery.5", "Heat loss:§f %d§bGU/t");
         LH.add("gt.waila.multiblock.0", "§cStructure not Formed");

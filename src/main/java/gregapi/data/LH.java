@@ -249,6 +249,14 @@ public class LH {
 	, ADVCRAFTING_AUTOMATION_ACCESS = "gt.advcrafting.automation.access"
 	, ADVCRAFTING_NEUTRAL_SLOT = "gt.advcrafting.neutral.slot"
 	, ADVCRAFTING_DROP_SLOT = "gt.advcrafting.drop.slot"
+	, SCULPTINGTABLE_CHISEL_SLOT = "gt.sculptingtable.chisel.slot"
+	, SCULPTINGTABLE_MOLD_SLOT = "gt.sculptingtable.mold.slot"
+	, SCULPTINGTABLE_PANEL_SLOT = "gt.sculptingtable.panel.slot"
+	, SCULPTINGTABLE_PANEL_SLOT_NONE = "gt.sculptingtable.panel.slot.none"
+	, SCULPTINGTABLE_PANEL_SLOT_LOCKED = "gt.sculptingtable.panel.slot.locked"
+	, SCULPTINGTABLE_MOLD_OUTPUT_SLOT = "gt.sculptingtable.output.mold.slot"
+	, SCULPTINGTABLE_BLUEPRINT_SAVE_SLOT = "gt.sculptingtable.blueprint.save.slot"
+	, SCULPTINGTABLE_BLUEPRINT_CLEAR_SLOT = "gt.sculptingtable.blueprint.clear.slot"
 	, TIME_TICK = "gt.lang.time.tick"
 	, TIME_SEC = "gt.lang.time.second"
 	, TIME_MIN = "gt.lang.time.minute"
@@ -651,6 +659,14 @@ public class LH {
 		add(ADVCRAFTING_AUTOMATION_ACCESS               , "Allow Automation to extract from the Crafting Grid");
 		add(ADVCRAFTING_NEUTRAL_SLOT                    , "This Slot does ABSOLUTELY NOTHING! park Items here!");
 		add(ADVCRAFTING_DROP_SLOT                       , "Automation can extract Items you drop into this Slot");
+		add(SCULPTINGTABLE_CHISEL_SLOT                  , "Put any Chisel into this Slot");
+		add(SCULPTINGTABLE_MOLD_SLOT                    , "Put Molds into this Slot");
+		add(SCULPTINGTABLE_PANEL_SLOT                   , "Click to Toggle");
+		add(SCULPTINGTABLE_PANEL_SLOT_NONE              , "None, check Chisel and Mold Slot");
+		add(SCULPTINGTABLE_PANEL_SLOT_LOCKED            , "Locked, Clear Blueprint first");
+		add(SCULPTINGTABLE_MOLD_OUTPUT_SLOT             , "Confirm");
+		add(SCULPTINGTABLE_BLUEPRINT_SAVE_SLOT          , "Save current blueprint");
+		add(SCULPTINGTABLE_BLUEPRINT_CLEAR_SLOT         , "Clear current blueprint");
 		add(TIME_TICK                                   , "Tick");
 		add(TIME_SEC                                    , "Second");
 		add(TIME_MIN                                    , "Minute");
