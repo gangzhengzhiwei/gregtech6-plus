@@ -63,28 +63,6 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
     @Override public boolean canDrop(int aSlot) {return T;}
     @Override public String getTileEntityName() {return "gt.multitileentity.sculptingtable";}
     @Override public boolean canInsertItem2(int aSlot, ItemStack aStack, byte aSide) {return F;}
-    @Override public boolean interceptClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {return T;}
-
-    @Override
-    public ItemStack slotClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {
-        if (!aRightclick) {
-            ItemStack tStack = aPlayer.inventory.getItemStack();
-            switch (aInvSlot) {
-                case 0: {
-                    if (ST.valid(tStack) && ToolsGT.contains(TOOL_chisel, tStack)) return tStack;
-                    break;
-                }
-                case 1: {
-                    if (ST.valid(tStack) && tStack.getItem() instanceof MultiTileEntityItemInternal) {
-                        MultiTileEntityContainer tContainer = ((MultiTileEntityItemInternal) tStack.getItem()).mBlock.mMultiTileEntityRegistry.getNewTileEntityContainer(tStack);
-                        if (tContainer != null && tContainer.mTileEntity instanceof MultiTileEntityMold) return tStack;
-                    }
-                    break;
-                }
-            }
-        }
-        return null;
-    }
 
     @Override
     public boolean onBlockActivated3(EntityPlayer aPlayer, byte aSide, float aHitX, float aHitY, float aHitZ) {
@@ -125,10 +103,25 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
 
         @Override
         public int getSlotCount() {
-            return 2;
+            return 3;
         }
     }
-
+    public boolean isItemValidForSlotGUI(int aSlot, ItemStack aStack) {
+        switch (aSlot) {
+        case 0: {
+            if (ST.valid(aStack) && ToolsGT.contains(TOOL_chisel, aStack)) return true;
+            break;
+        }
+        case 1: {
+            if (ST.valid(aStack) && aStack.getItem() instanceof MultiTileEntityItemInternal) {
+                MultiTileEntityContainer tContainer = ((MultiTileEntityItemInternal) aStack.getItem()).mBlock.mMultiTileEntityRegistry.getNewTileEntityContainer(aStack);
+                if (tContainer != null && tContainer.mTileEntity instanceof MultiTileEntityMold) return true;
+            }
+            break;
+        }
+        }
+        return false;
+    }
     @SideOnly(Side.CLIENT)
     public class MultiTileEntityGUIClientSculptingTable extends ContainerClient {
         public MultiTileEntityGUIClientSculptingTable(InventoryPlayer aInventoryPlayer, MultiTileEntitySculptingTable aTileEntity, int aGUIID) {
