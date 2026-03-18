@@ -254,6 +254,7 @@ public class LH {
 	, SCULPTINGTABLE_PANEL_SLOT = "gt.sculptingtable.panel.slot"
 	, SCULPTINGTABLE_PANEL_SLOT_NONE = "gt.sculptingtable.panel.slot.none"
 	, SCULPTINGTABLE_PANEL_SLOT_LOCKED = "gt.sculptingtable.panel.slot.locked"
+	, SCULPTINGTABLE_PANEL_SLOT_SCULPTED = "gt.sculptingtable.panel.slot.sculpted"
 	, SCULPTINGTABLE_MOLD_OUTPUT_SLOT = "gt.sculptingtable.output.mold.slot"
 	, SCULPTINGTABLE_BLUEPRINT_SAVE_SLOT = "gt.sculptingtable.blueprint.save.slot"
 	, SCULPTINGTABLE_BLUEPRINT_CLEAR_SLOT = "gt.sculptingtable.blueprint.clear.slot"
@@ -664,6 +665,7 @@ public class LH {
 		add(SCULPTINGTABLE_PANEL_SLOT                   , "Click to Toggle");
 		add(SCULPTINGTABLE_PANEL_SLOT_NONE              , "None, check Chisel and Mold Slot");
 		add(SCULPTINGTABLE_PANEL_SLOT_LOCKED            , "Locked, Clear Blueprint first");
+		add(SCULPTINGTABLE_PANEL_SLOT_SCULPTED          , "Has been Sculpted, Can't change");
 		add(SCULPTINGTABLE_MOLD_OUTPUT_SLOT             , "Confirm");
 		add(SCULPTINGTABLE_BLUEPRINT_SAVE_SLOT          , "Save current blueprint");
 		add(SCULPTINGTABLE_BLUEPRINT_CLEAR_SLOT         , "Clear current blueprint");

@@ -687,7 +687,7 @@ public class MultiItemTool extends MultiItem implements IItemGTHandTool, IItemGT
 	}
 
 	@SideOnly(Side.CLIENT)
-	private static boolean shouldRenderEnergyBarInGuiOnly() {
+	public static boolean shouldRenderEnergyBarInGuiOnly() {
 		StackTraceElement[] tTrace = Thread.currentThread().getStackTrace();
 		for (StackTraceElement tElement : tTrace) {
 			String tClass = tElement.getClassName();

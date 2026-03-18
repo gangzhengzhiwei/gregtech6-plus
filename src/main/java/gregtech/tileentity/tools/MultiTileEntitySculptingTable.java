@@ -17,13 +17,35 @@ import gregapi.util.ST;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
+import java.util.List;
+
 import static gregapi.data.CS.*;
 
 public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
+    public static int sMoldSculptingPanelStart;
+
+    public int mShape = 0;
+    public int mBlueprintShape = 0;
+    public boolean mGUIUpdateNeeded = F;
+
+    @Override
+    public void writeToNBT2(NBTTagCompound aNBT) {
+        super.writeToNBT2(aNBT);
+        aNBT.setInteger("gt.sculptingtable.shape", mShape);
+        aNBT.setInteger("gt.sculptingtable.shape.blueprint", mBlueprintShape);
+    }
+
+    @Override
+    public void readFromNBT2(NBTTagCompound aNBT) {
+        super.readFromNBT2(aNBT);
+        mShape = aNBT.getInteger("gt.sculptingtable.shape");
+        mBlueprintShape = aNBT.getInteger("gt.sculptingtable.shape.blueprint");
+    }
 
     @Override
     public boolean setBlockBounds2(Block aBlock, int aRenderPass, boolean[] aSideShouldBeRendered) {
@@ -75,8 +97,79 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
     @Override public Object getGUIServer2(int aGUIID, EntityPlayer aPlayer) {return new MultiTileEntityGUICommonSculptingTable(aPlayer.inventory, this, aGUIID);}
     @SideOnly(Side.CLIENT) @Override public Object getGUIClient2(int aGUIID, EntityPlayer aPlayer) {return new MultiTileEntityGUIClientSculptingTable(aPlayer.inventory, this, aGUIID);}
 
+    @Override public boolean interceptClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {
+        mGUIUpdateNeeded = T;
+        if (aInvSlot == 10 || aInvSlot == 2) return T;
+        return F;
+    }
+
+    @Override
+    public ItemStack slotClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {
+        if (isClientSide()) return null;
+        if (aInvSlot == 10 && !aShiftclick && !aRightclick) {
+            int tIndex = aSlotIndex - sMoldSculptingPanelStart;
+            if (tIndex>=0 && tIndex<25) {
+                if (mBlueprintShape != 0) return null;
+                ItemStack tChisel = slot(0), tMold = slot(1);
+                if (tChisel == null || tMold == null) return null;
+                int tMoldShape = tMold.stackTagCompound == null ? 0 : tMold.stackTagCompound.getInteger("gt.mold");
+                if ((tMoldShape & B[tIndex]) != 0) return null;
+                mShape ^= B[tIndex];
+                mGUIUpdateNeeded = T;
+            }
+            else if (tIndex == 25) {
+                ItemStack tMold = slot(1);
+                if (tMold == null) return null;
+                int tMoldShape = tMold.stackTagCompound == null ? 0 : tMold.stackTagCompound.getInteger("gt.mold");
+                mBlueprintShape = tMoldShape | mShape;
+                mGUIUpdateNeeded = T;
+            }
+            else if (tIndex == 26) {
+                mBlueprintShape = 0;
+                mShape = 0;
+                mGUIUpdateNeeded = T;
+            }
+        }
+        if (aInvSlot == 2 && !aRightclick) {
+            if (mShape == 0 && mBlueprintShape == 0) return null;
+            ItemStack tOutput = slot(2), tInput = slot(1), tChisel = slot(0);
+            if (tOutput == null || tInput == null) return null;
+            if (aShiftclick) {
+            }
+            else {
+                tInput.stackSize -= 1;
+                if (tInput.stackSize <= 0) setInventorySlotContents(1, null);
+                tChisel.damageItem(100, aPlayer);
+                ItemStack tMoldSculpted = tOutput.copy();
+                tMoldSculpted.stackSize = 1;
+                return tMoldSculpted;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isItemValidForSlotGUI(int aSlot, ItemStack aStack) {
+        switch (aSlot) {
+            case 0: {
+                if (ST.valid(aStack) && ToolsGT.contains(TOOL_chisel, aStack)) return T;
+                break;
+            }
+            case 1: {
+                if (ST.valid(aStack) && aStack.getItem() instanceof MultiTileEntityItemInternal) {
+                    MultiTileEntityContainer tContainer = ((MultiTileEntityItemInternal) aStack.getItem()).mBlock.mMultiTileEntityRegistry.getNewTileEntityContainer(aStack);
+                    if (tContainer != null && tContainer.mTileEntity instanceof MultiTileEntityMold) return T;
+                }
+                break;
+            }
+        }
+        return F;
+    }
+
     public class MultiTileEntityGUICommonSculptingTable extends ContainerCommon {
         public Slot_Render[] mPanelSlots;
+        public int mShape = 0;
+        public int mBlueprintShape = 0;
         public MultiTileEntityGUICommonSculptingTable(InventoryPlayer aInventoryPlayer, MultiTileEntitySculptingTable aTileEntity, int aGUIID) {
             super(aInventoryPlayer, aTileEntity, aGUIID);
         }
@@ -88,8 +181,9 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
             addSlotToContainer(new Slot_Holo(mTileEntity, 2, 8, 60, F, F, 1).setTooltip(LH.SCULPTINGTABLE_MOLD_OUTPUT_SLOT, LH.Chat.WHITE));//Mold Output Slot
 
             int index = 0;
-            for (int i=28;i<107;i+=16) { //Mold Sculpting Panel
-                for (int j=2;j<81;j+=16) {
+            sMoldSculptingPanelStart = inventorySlots.size();
+            for (int j=2;j<81;j+=16) { //Mold Sculpting Panel
+                for (int i=28;i<107;i+=16) {
                     Slot_Render tSlot = (Slot_Render) new Slot_Render(mTileEntity, 10 , i, j).setTooltip(LH.SCULPTINGTABLE_PANEL_SLOT_NONE, LH.Chat.RED);
                     addSlotToContainer(tSlot);
                     mPanelSlots[index] = tSlot;
@@ -105,27 +199,95 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
         public int getSlotCount() {
             return 3;
         }
-    }
-    public boolean isItemValidForSlotGUI(int aSlot, ItemStack aStack) {
-        switch (aSlot) {
-        case 0: {
-            if (ST.valid(aStack) && ToolsGT.contains(TOOL_chisel, aStack)) return true;
-            break;
-        }
-        case 1: {
-            if (ST.valid(aStack) && aStack.getItem() instanceof MultiTileEntityItemInternal) {
-                MultiTileEntityContainer tContainer = ((MultiTileEntityItemInternal) aStack.getItem()).mBlock.mMultiTileEntityRegistry.getNewTileEntityContainer(aStack);
-                if (tContainer != null && tContainer.mTileEntity instanceof MultiTileEntityMold) return true;
+
+        @Override @SuppressWarnings("unchecked")
+        public void detectAndSendChanges() {
+            if (!((MultiTileEntitySculptingTable) mTileEntity).mGUIUpdateNeeded) return;
+            ((MultiTileEntitySculptingTable) mTileEntity).mGUIUpdateNeeded = F;
+            mShape = ((MultiTileEntitySculptingTable) mTileEntity).mShape;
+            mBlueprintShape = ((MultiTileEntitySculptingTable) mTileEntity).mBlueprintShape;
+            for (ICrafting tUpdate : (List<ICrafting>) crafters) {
+                tUpdate.sendProgressBarUpdate(this, 0, ((MultiTileEntitySculptingTable) mTileEntity).mShape);
+                tUpdate.sendProgressBarUpdate(this, 1, ((MultiTileEntitySculptingTable) mTileEntity).mBlueprintShape);
             }
-            break;
+            if (slot(0) == null || slot(1) == null) {
+                ((MultiTileEntitySculptingTable) mTileEntity).mShape = 0;
+                setInventorySlotContents(2, null);
+            }
+            else {
+                ItemStack tMoldSculpted = slot(1).copy();
+                tMoldSculpted.stackSize = 0;
+                NBTTagCompound tMoldNBT = slotNBT(1);
+                tMoldSculpted.stackTagCompound = tMoldNBT == null ? new NBTTagCompound() : (NBTTagCompound) tMoldNBT.copy();
+                tMoldSculpted.stackTagCompound.setInteger("gt.mold", mBlueprintShape == 0 ? mShape | tMoldSculpted.stackTagCompound.getInteger("gt.mold") : mBlueprintShape);
+                setInventorySlotContents(2, tMoldSculpted);
+            }
+            super.detectAndSendChanges();
         }
+
+        @SideOnly(Side.CLIENT) @Override
+        public void updateProgressBar(int aID, int aValue) {
+            switch (aID) {
+                case 0: mShape = aValue; break;
+                case 1: mBlueprintShape = aValue; break;
+            }
+            if (mBlueprintShape == 0) {
+                ItemStack tChisel = ((MultiTileEntitySculptingTable) mTileEntity).slot(0);
+                ItemStack tMold = ((MultiTileEntitySculptingTable) mTileEntity).slot(1);
+                if (tChisel == null || tMold == null) {
+                    for (int i = 0; i < 25; i++)
+                        mPanelSlots[i].setTooltip(LH.SCULPTINGTABLE_PANEL_SLOT_NONE, LH.Chat.RED);
+                    return;
+                }
+                int tMoldShape = tMold.stackTagCompound == null ? 0 : tMold.stackTagCompound.getInteger("gt.mold");
+                for (int i = 0; i < 25; i++) {
+                    if ((tMoldShape & B[i]) != 0) mPanelSlots[i].setTooltip(LH.SCULPTINGTABLE_PANEL_SLOT_SCULPTED, LH.Chat.RED);
+                    else mPanelSlots[i].setTooltip(LH.SCULPTINGTABLE_PANEL_SLOT, LH.Chat.WHITE);
+                }
+            }
+            else {
+                for (int i = 0; i < 25; i++) mPanelSlots[i].setTooltip(LH.SCULPTINGTABLE_PANEL_SLOT_LOCKED, LH.Chat.RED);
+            }
         }
-        return false;
     }
+
     @SideOnly(Side.CLIENT)
     public class MultiTileEntityGUIClientSculptingTable extends ContainerClient {
         public MultiTileEntityGUIClientSculptingTable(InventoryPlayer aInventoryPlayer, MultiTileEntitySculptingTable aTileEntity, int aGUIID) {
             super(new MultiTileEntityGUICommonSculptingTable(aInventoryPlayer, aTileEntity, aGUIID), RES_PATH_GUI + "machines/SculptingTable.png");
+        }
+
+        @Override
+        protected void drawGuiContainerBackgroundLayer2(float par1, int par2, int par3) {
+            super.drawGuiContainerBackgroundLayer2(par1, par2, par3);
+            int x = (width - xSize) / 2;
+            int y = (height - ySize) / 2;
+            MultiTileEntityGUICommonSculptingTable tContainer = (MultiTileEntityGUICommonSculptingTable) mContainer;
+            ItemStack tChisel = ((MultiTileEntitySculptingTable) mContainer.mTileEntity).slot(0);
+            ItemStack tMold = ((MultiTileEntitySculptingTable) mContainer.mTileEntity).slot(1);
+            if (tChisel == null || tMold == null) return;
+            int tMoldShape = tMold.stackTagCompound == null ? 0 : tMold.stackTagCompound.getInteger("gt.mold");
+            for (int i=0;i<25;i++) {
+                if ((tContainer.mShape & B[i]) != 0) drawDarkSlot(i, x, y);
+                if ((tMoldShape & B[i])!=0) drawRedSlot(i, x, y);
+                if ((tContainer.mBlueprintShape & B[i])!=0) drawBlueSlot(i, x, y);
+            }
+        }
+
+        protected void drawRedSlot(int aIndex, int aGUIX, int aGUIY) {
+            int tX = 28 + (aIndex % 5) * 16;
+            int tY = 2 + (aIndex / 5) * 16;
+            drawTexturedModalRect(tX + aGUIX, tY + aGUIY, 112, 32, 16, 16);
+        }
+        protected void drawDarkSlot(int aIndex, int aGUIX, int aGUIY) {
+            int tX = 28 + (aIndex % 5) * 16;
+            int tY = 2 + (aIndex / 5) * 16;
+            drawTexturedModalRect(tX + aGUIX, tY + aGUIY, 176, 16, 16, 16);
+        }
+        protected void drawBlueSlot(int aIndex, int aGUIX, int aGUIY) {
+            int tX = 28 + (aIndex % 5) * 16;
+            int tY = 2 + (aIndex / 5) * 16;
+            drawTexturedModalRect(tX + aGUIX, tY + aGUIY, 176,  0, 16, 16);
         }
     }
 }
