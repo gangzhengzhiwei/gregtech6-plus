@@ -1,12 +1,11 @@
 This is the most recent Changelog. It also contains some of the changes inside the >>>UPCOMING<<< Versions (most of the time). This is for 1.7.10 btw.
 
-6.1.0-plus: (Not released yet)
+6plus1.0: (Not released yet)
+[FIXED] The crucible heat loss is more smooth.
+[ADDED] Sculpting Table, making it easier to sculpt molds.
+[ADDED] Waila Compat, in WIP.
 [ADDED] zh_CN language file is in default config pack.Thanks to translation groupware.
 [REMOVED] Print_Missing_I18n_Key config is removed due to unstable.
-
-6.0.5-vd2:
-[FIXED] The crucible heat loss is more smooth.
-[ADDED] Waila Compat, in WIP.
 
 6.0.4-vd2:
 [ADDED] Print_Missing_I18n_Key config in client.cfg, default is false. Gregtech will print missing i18n key of language file in gregtech.log.

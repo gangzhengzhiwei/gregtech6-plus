@@ -23,6 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 
 import java.util.List;
+import java.util.Objects;
 
 import static gregapi.data.CS.*;
 
@@ -105,7 +106,6 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
 
     @Override
     public ItemStack slotClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {
-        if (isClientSide()) return null;
         if (aInvSlot == 10 && !aShiftclick && !aRightclick) {
             int tIndex = aSlotIndex - sMoldSculptingPanelStart;
             if (tIndex>=0 && tIndex<25) {
@@ -132,19 +132,29 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
         }
         if (aInvSlot == 2 && !aRightclick) {
             if (mShape == 0 && mBlueprintShape == 0) return null;
-            ItemStack tOutput = slot(2), tInput = slot(1), tChisel = slot(0);
+            ItemStack tOutput = slot(2), tInput = slot(1), tChisel = slot(0), tStack = aPlayer.inventory.getItemStack();
             if (tOutput == null || tInput == null) return null;
+            if (tStack != null && (tStack.getItem() != tOutput.getItem() || !Objects.equals(tStack.stackTagCompound, tOutput.stackTagCompound))) return null;
+            ItemStack tMoldSculpted = tOutput.copy();
             if (aShiftclick) {
+                int tMaxCount = tInput.stackSize;
+                for (int i=1;i<=tMaxCount;i++) {
+                    if (slot(0) == null) break;
+                    tInput.stackSize -= 1;
+                    if (tInput.stackSize <= 0) setInventorySlotContents(1, null);
+                    tChisel.damageItem(100, aPlayer);
+                    tMoldSculpted.stackSize = i;
+                }
             }
             else {
                 tInput.stackSize -= 1;
                 if (tInput.stackSize <= 0) setInventorySlotContents(1, null);
                 tChisel.damageItem(100, aPlayer);
-                ItemStack tMoldSculpted = tOutput.copy();
                 tMoldSculpted.stackSize = 1;
-                aPlayer.inventory.setItemStack(tMoldSculpted);
-                return aPlayer.inventory.getItemStack();
             }
+            tMoldSculpted.stackSize += tStack == null ? 0 : tStack.stackSize;
+            aPlayer.inventory.setItemStack(tMoldSculpted);
+            return aPlayer.inventory.getItemStack();
         }
         return null;
     }
@@ -204,16 +214,18 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
 
         @Override @SuppressWarnings("unchecked")
         public void detectAndSendChanges() {
-            if (!((MultiTileEntitySculptingTable) mTileEntity).mGUIUpdateNeeded) return;
-            ((MultiTileEntitySculptingTable) mTileEntity).mGUIUpdateNeeded = F;
-            mShape = ((MultiTileEntitySculptingTable) mTileEntity).mShape;
-            mBlueprintShape = ((MultiTileEntitySculptingTable) mTileEntity).mBlueprintShape;
+            MultiTileEntitySculptingTable tTileEntity = (MultiTileEntitySculptingTable) mTileEntity;
+            if (mShape != tTileEntity.mShape || mBlueprintShape != tTileEntity.mBlueprintShape) tTileEntity.mGUIUpdateNeeded = T;
+            if (!tTileEntity.mGUIUpdateNeeded) return;
+            tTileEntity.mGUIUpdateNeeded = F;
+            mShape = tTileEntity.mShape;
+            mBlueprintShape = tTileEntity.mBlueprintShape;
             for (ICrafting tUpdate : (List<ICrafting>) crafters) {
-                tUpdate.sendProgressBarUpdate(this, 0, ((MultiTileEntitySculptingTable) mTileEntity).mShape);
-                tUpdate.sendProgressBarUpdate(this, 1, ((MultiTileEntitySculptingTable) mTileEntity).mBlueprintShape);
+                tUpdate.sendProgressBarUpdate(this, 0, tTileEntity.mShape);
+                tUpdate.sendProgressBarUpdate(this, 1, tTileEntity.mBlueprintShape);
             }
             if (slot(0) == null || slot(1) == null) {
-                ((MultiTileEntitySculptingTable) mTileEntity).mShape = 0;
+                tTileEntity.mShape = 0;
                 setInventorySlotContents(2, null);
             }
             else {
