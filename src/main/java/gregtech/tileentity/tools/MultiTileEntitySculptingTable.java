@@ -142,7 +142,8 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
                 tChisel.damageItem(100, aPlayer);
                 ItemStack tMoldSculpted = tOutput.copy();
                 tMoldSculpted.stackSize = 1;
-                return tMoldSculpted;
+                aPlayer.inventory.setItemStack(tMoldSculpted);
+                return aPlayer.inventory.getItemStack();
             }
         }
         return null;
@@ -163,6 +164,7 @@ public class MultiTileEntitySculptingTable extends TileEntityBase07Paintable {
                 break;
             }
         }
+
         return F;
     }
 
