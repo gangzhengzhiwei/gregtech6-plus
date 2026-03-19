@@ -565,5 +565,9 @@ public class Loader_Recipes_Chem implements Runnable {
 
 		//Annealed Copper
 		RM.Electrolyzer .addRecipe1(T, 16, 4096, OP.dust.mat(MT.Cu, 10), FL.array(MT.BlueVitriol.liquid(2*U,F)), FL.array(MT.BlueVitriol.liquid(2*U,F),MT.GreenVitriol.liquid(1*U10,F),MT.WhiteVitriol.liquid(1*U10,F)),OP.dust.mat(MT.AnnealedCopper,10),OM.dust(MT.CopperAnodeMud, 1*U9));
+
+		//MgO2H2
+		RM.Mixer        .addRecipe2(T, 16, 256, OP.dust.mat(MT.MgCl2, 3), OP.dust.mat(MT.NaOH, 2), FL.Water.make(2000), FL.Saltwater.make(2000), OP.dust.mat(MT.MgO2H2, 5));
+		RM.Mixer        .addRecipe2(T, 16, 256, OP.dust.mat(MT.MgCl2, 3), OP.dust.mat(MT.NaOH, 2), FL.DistW.make(2000), FL.Saltwater.make(2000), OP.dust.mat(MT.MgO2H2, 5));
 	}
 }

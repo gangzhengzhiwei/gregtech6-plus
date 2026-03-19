@@ -856,7 +856,8 @@ public class MT {
 	
 	MgCl2                   = oredustdcmp   ( 8018, "Magnesium Chloride"    , SET_CUBE              , 235, 235, 250, 255, MELTING, MOLTEN, INGOTS)                                                                                                                  .uumMcfg( 0, Mg             , 1*U, Cl               , 2*U)                                                                                                  .aspects(TC.FAMES, 1).heat( 987, 1685), // Can be electrolyzed for real
 	MgCO3                   = oredustdcmp   ( 8016, "Magnesium Carbonate"   , SET_DULL              , 240, 230, 230, 255, MELTING, MOLTEN, INGOTS, "Magnesite")                                                                                                     .uumMcfg( 0, Mg             , 1*U, CO3              , 4*U)                                                                                                  .heat( 623, 3000),
-	
+	MgO                     = dustelec      ( 9410, "Magnesium Oxide"       , SET_METALLIC          , 240, 240, 240, 255, MELTING, MOLTEN, INGOTS)                                                                                                                  .uumMcfg( 0, Mg             , 1*U, O                , 1*U)                                                                                                  .heat(3125, 3873),
+	MgO2H2                  = dust          ( 9411, "Magnesium Hydroxide"   , SET_CUBE              , 245, 245, 245, 255)                                                                                                                                           .uumMcfg( 0, Mg             , 1*U, O                , 2*U, H                , 2*U)                                                                 .heat(623).setSmelting(MgO, 4*U10),
 	
 	CaCl2                   = oredustdcmp   ( 8028, "Calcium Chloride"      , SET_CUBE              , 235, 235, 250, 255, MELTING, MOLTEN, INGOTS)                                                                                                                  .uumMcfg( 0, Ca             , 1*U, Cl               , 2*U)                                                                                                  .aspects(TC.FAMES, 1).heat(1048, 2208), // Can be electrolyzed for real
 	CaSO4                   = dustdcmp      ( 8274, "Calcium Sulfate"       , SET_CUBE              , 240, 220, 210, 255, MORTAR, "CalciumSulphate")                                                                                                                .uumMcfg( 0, Ca             , 1*U, S                , 1*U, O                , 4*U)                                                                          .heat(1730, 3000),
@@ -1927,6 +1928,7 @@ public class MT {
 			NiobiumTitanium         .put(MD.GT);
 			Ta4HfC5                 .put(MD.GT);
 			Al2O3                   .put(MD.GT);
+			MgO                     .put(MD.GT);
 			Osmiridium              .put(MD.GT);
 			UUAmplifier             .put(MD.GT);
 			Primitive               .put(MD.GT);

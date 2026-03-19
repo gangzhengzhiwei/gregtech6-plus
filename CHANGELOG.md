@@ -2,9 +2,11 @@ This is the most recent Changelog. It also contains some of the changes inside t
 
 6plus1.0: (Not released yet)
 [FIXED] The crucible heat loss is more smooth.
+[ADDED] Large Alumina Crucible. And metal fire resistance wall.
 [ADDED] Sculpting Table, making it easier to sculpt molds.
 [ADDED] Waila Compat, in WIP.
 [ADDED] zh_CN language file is in default config pack.Thanks to translation groupware.
+[REMOVED] Large steel, invar, stainless steel, titanium crucible.
 [REMOVED] Print_Missing_I18n_Key config is removed due to unstable.
 
 6.0.4-vd2:
