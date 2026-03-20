@@ -37,7 +37,7 @@ public class Loader_Items implements Runnable {
 	@Override
 	public void run() {
 		PrefixItem tItem;
-		
+
 		ItemsGT.TECH       = new MultiItemTechnological(MD.GT.mID, "gt.multiitem.technological");
 		ItemsGT.TOOLS      = new MultiItemRandomTools  (MD.GT.mID, "gt.multiitem.randomtools");
 		ItemsGT.CANS       = new MultiItemCans         (MD.GT.mID, "gt.multiitem.cans");

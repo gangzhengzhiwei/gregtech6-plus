@@ -541,17 +541,10 @@ public class MultiItemTechnological extends MultiItemRandomWithCompat {
 		RM.Press.addRecipeX(T, 16, 64, ST.array(OP.dust.mat(MT.Endstone , 5)                                 , OP.gem      .mat(MT.EnderEye, 2)), IL.Electrode_FR_Ender       .get(4));
 		RM.Press.addRecipeX(T, 16, 64, ST.array(ST.make(Blocks.end_stone, 5, W)                              , OP.dust     .mat(MT.EnderEye, 2)), IL.Electrode_FR_Ender       .get(4));
 		RM.Press.addRecipeX(T, 16, 64, ST.array(ST.make(Blocks.end_stone, 5, W)                              , OP.gem      .mat(MT.EnderEye, 2)), IL.Electrode_FR_Ender       .get(4));
-		
-		
-		IL.Circuit_Plate_Empty             .set(addItem(30000, "Circuit Plate"                    , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.SiO2, U, ANY.Plastic, U), TC.stack(TC.FABRICO, 1)));
-		
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-			ItemStack tDust = OP.dust.mat(tMat, 1);
-			if (ST.valid(tDust)) for (OreDictMaterial tMt2 : ANY.Plastic.mToThis) {
-				RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(tMt2, 1), tDust, IL.Circuit_Plate_Empty.get(1));
-			}
-		}
-		
+
+
+		IL.Circuit_Plate_PlyWood           .set(addItem(30007, "Circuit Plate Plywood"            , "Only can make Circuit Plate (Copper)"                                           , TC.stack(TC.FABRICO, 1)));
+
 		IL.Circuit_Wire_Copper             .set(addItem(30001, "Circuit Wiring (Copper)"          , "Needs to be placed on an empty Circuit Plate"    , new OreDictItemData(MT.Cu, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.PERMUTATIO, 1)));
 		IL.Circuit_Plate_Copper            .set(addItem(30002, "Circuit Plate (Copper)"           , "Needs Circuit Parts"                             , new OreDictItemData(MT.Cu, U, ANY.SiO2, U, ANY.Plastic, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.PERMUTATIO, 1)));
 		IL.Circuit_Wire_Gold               .set(addItem(30003, "Circuit Wiring (Gold)"            , "Needs to be placed on an empty Circuit Plate"    , new OreDictItemData(MT.Au, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.LUCRUM, 1)));
@@ -569,14 +562,15 @@ public class MultiItemTechnological extends MultiItemRandomWithCompat {
 		IL.Circuit_Plate_HSLA              .set(addItem(30099, "Circuit Plate (HSLA)"             , "Needs Circuit Parts"                             , new OreDictItemData(MT.HSLA, U, MT.Au, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.MACHINA, 1), MD.RoC.mLoaded ? null : TD.Creative.HIDDEN));
 		
 		CR.shaped(IL.Circuit_Wire_Copper        .get(1), CR.DEF, "WWW", "WxW", "WWW", 'W', OP.wireFine.dat(ANY.Cu));
-		
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Copper    .get(1), IL.Circuit_Plate_Copper    .get(1));
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Gold      .get(1), IL.Circuit_Plate_Gold      .get(1));
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Platinum  .get(1), IL.Circuit_Plate_Platinum  .get(1));
 
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Magic     .get(1), IL.Circuit_Plate_Magic     .get(1));
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Enderium  .get(1), IL.Circuit_Plate_Enderium  .get(1));
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Signalum  .get(1), IL.Circuit_Plate_Signalum  .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_PlyWood.get(1), IL.Circuit_Wire_Copper    .get(1), IL.Circuit_Plate_Copper    .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.Bakelite, 1), IL.Circuit_Wire_Copper    .get(1), IL.Circuit_Plate_Copper    .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.Bakelite, 1), IL.Circuit_Wire_Gold      .get(1), IL.Circuit_Plate_Gold      .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.Bakelite, 1), IL.Circuit_Wire_Platinum  .get(1), IL.Circuit_Plate_Platinum  .get(1));
+
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.Bakelite, 1), IL.Circuit_Wire_Magic     .get(1), IL.Circuit_Plate_Magic     .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.Bakelite, 1), IL.Circuit_Wire_Enderium  .get(1), IL.Circuit_Plate_Enderium  .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.Bakelite, 1), IL.Circuit_Wire_Signalum  .get(1), IL.Circuit_Plate_Signalum  .get(1));
 		
 		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.HSLA, 1), IL.Circuit_Wire_Gold.get(1), IL.Circuit_Plate_HSLA.get(1));
 		

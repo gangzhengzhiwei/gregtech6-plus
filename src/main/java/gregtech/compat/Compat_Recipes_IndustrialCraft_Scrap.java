@@ -71,7 +71,6 @@ public class Compat_Recipes_IndustrialCraft_Scrap extends CompatMods {
 			COMPAT_IC2.scrapbox(0.60F, ST.make(Items.slime_ball, 1, 0));
 			COMPAT_IC2.scrapbox(0.80F, OP.dust.mat(MT.Rubber, 1));
 			COMPAT_IC2.scrapbox(2.70F, ST.mkic("suBattery", 1));
-			COMPAT_IC2.scrapbox(3.20F, IL.Circuit_Plate_Empty.get(1));
 			COMPAT_IC2.scrapbox(1.60F, IL.Circuit_Plate_Copper.get(1));
 			COMPAT_IC2.scrapbox(0.40F, IL.Circuit_Plate_Gold.get(1));
 			COMPAT_IC2.scrapbox(0.10F, IL.Circuit_Plate_Platinum.get(1));

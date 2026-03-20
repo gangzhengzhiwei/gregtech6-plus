@@ -6,8 +6,10 @@ This is the most recent Changelog. It also contains some of the changes inside t
 [ADDED] Sculpting Table, making it easier to sculpt molds.
 [ADDED] Waila Compat, in WIP.
 [ADDED] zh_CN language file is in default config pack.Thanks to translation groupware.
+[ADDED] Circule Plate Plywood, only can make Circule Play (Copper).
 [REMOVED] Large steel, invar, stainless steel, titanium crucible.
 [REMOVED] Print_Missing_I18n_Key config is removed due to unstable.
+[REMOVED] Circule Plate Empty, it is now replaced by bakelite plate.
 
 6.0.4-vd2:
 [ADDED] Print_Missing_I18n_Key config in client.cfg, default is false. Gregtech will print missing i18n key of language file in gregtech.log.
