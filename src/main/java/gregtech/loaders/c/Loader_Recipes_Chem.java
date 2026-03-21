@@ -35,10 +35,10 @@ import static gregapi.data.OP.*;
 public class Loader_Recipes_Chem implements Runnable {
 	@Override public void run() {
 		for (FluidStack tWater : FL.waters(1000)) {
-		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.NaCl   , U4), FL.mul(tWater, 3, 4, T), MT.SaltWater  .liquid(U*1, F), ZL_IS);
-		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.NaCl       ), FL.mul(tWater, 3      ), MT.SaltWater  .liquid(U*4, F), ZL_IS);
-		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.KCl    , U4), FL.mul(tWater, 3, 4, T), MT.SaltedWater.liquid(U*1, F), ZL_IS);
-		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.KCl        ), FL.mul(tWater, 3      ), MT.SaltedWater.liquid(U*4, F), ZL_IS);
+		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.NaCl   , U4), FL.mul(tWater, 3, 4, T), MT.SaltWater  .liquid(U*1, F), ZL_IS);
+		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.NaCl       ), FL.mul(tWater, 3      ), MT.SaltWater  .liquid(U*4, F), ZL_IS);
+		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.KCl    , U4), FL.mul(tWater, 3, 4, T), MT.SaltedWater.liquid(U*1, F), ZL_IS);
+		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.KCl        ), FL.mul(tWater, 3      ), MT.SaltedWater.liquid(U*4, F), ZL_IS);
 		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.MgCl2      ), FL.mul(tWater, 2      ), NF, OM.dust(MT.OREMATS.Bischofite, U*1));
 		RM.Mixer        .addRecipe1(T, 16,  112, OM.dust(MT.Na2SO4, U*7), FL.mul(tWater, 30     ), NF, OM.dust(MT.OREMATS.Mirabilite, U*7));
 		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Na2CO3     ),        tWater          , NF, OM.dust(MT.OREMATS.Trona));
