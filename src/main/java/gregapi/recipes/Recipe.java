@@ -279,10 +279,24 @@ public class Recipe {
 		public Recipe addRecipeX(boolean aOptimize, boolean aCheckForCollisions, boolean aFakeRecipe, boolean aHidden, boolean aLogErrors, long aEUt, long aDuration, long[] aChances, ItemStack[] aInputs                 , FluidStack[] aFluidInputs, FluidStack[]  aFluidOutputs, ItemStack... aOutputs) {return addRecipe(new Recipe(aOptimize, T, T, aInputs                   , aOutputs         , NI, aChances            , aFluidInputs         , aFluidOutputs         , aDuration, aEUt, 0), aCheckForCollisions, aFakeRecipe, aHidden, aLogErrors);}
 		
 		public Recipe addRecipe(Recipe aRecipe, boolean aCheckForCollisions, boolean aFakeRecipe, boolean aHidden, boolean aLogErrors) {
-			if (aRecipe == null) return null;
+			if (aRecipe == null) {
+				ERR.println("ERROR: Recipe is null!");
+				return null;
+			}
 			aRecipe.mHidden = aHidden;
 			aRecipe.mFakeRecipe = aFakeRecipe;
-			if (aCheckForCollisions && findRecipeInternal(null, null, F, F, Long.MAX_VALUE, null, aRecipe.mFluidInputs, aRecipe.mInputs) != null) return null;
+			if (aCheckForCollisions && findRecipeInternal(null, null, F, F, Long.MAX_VALUE, null, aRecipe.mFluidInputs, aRecipe.mInputs) != null) {
+				if (aLogErrors && mLogErrors) {
+					ERR.println("ERROR: Recipe Collision detected! This recipe will not be added to the Recipe Map!");
+					ERR.println("Recipe Map: " + mNameInternal);
+					ERR.println("Input Items:  " + ST.names(aRecipe.mInputs));
+					ERR.println("Input Fluid:  " + FL.configNames(aRecipe.mFluidInputs));
+					ERR.println("Output Items: " + ST.names(aRecipe.mOutputs));
+					ERR.println("Output Fluid: " + FL.configNames(aRecipe.mFluidOutputs));
+					int i = 0; for (StackTraceElement tElement : new Exception().getStackTrace()) if (!tElement.getClassName().equals(RecipeMap.class.getName())) if (i++<5 && !tElement.getClassName().startsWith("sun")) ERR.println("\tat " + tElement); else break;
+				}
+				return null;
+			}
 			return add(aRecipe, aLogErrors && mLogErrors);
 		}
 		

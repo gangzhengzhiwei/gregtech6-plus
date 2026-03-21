@@ -35,11 +35,11 @@ import static gregapi.data.OP.*;
 public class Loader_Recipes_Chem implements Runnable {
 	@Override public void run() {
 		for (FluidStack tWater : FL.waters(1000)) {
-		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.NaCl   , U4), FL.mul(tWater, 3, 4, T), MT.SaltWater  .liquid(U*1, F), ZL_IS);
-		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.NaCl       ), FL.mul(tWater, 3      ), MT.SaltWater  .liquid(U*4, F), ZL_IS);
-		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.KCl    , U4), FL.mul(tWater, 3, 4, T), MT.SaltedWater.liquid(U*1, F), ZL_IS);
-		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.KCl        ), FL.mul(tWater, 3      ), MT.SaltedWater.liquid(U*4, F), ZL_IS);
-		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.MgCl2      ), FL.mul(tWater, 2      ), NF, OM.dust(MT.OREMATS.Bischofite, U*1));
+		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.NaCl   , U4), FL.mul(tWater, 3, 4, T), MT.SaltWater  .liquid(U*1, F), ZL_IS);
+		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.NaCl       ), FL.mul(tWater, 3      ), MT.SaltWater  .liquid(U*4, F), ZL_IS);
+		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.KCl    , U4), FL.mul(tWater, 3, 4, T), MT.SaltedWater.liquid(U*1, F), ZL_IS);
+		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.KCl        ), FL.mul(tWater, 3      ), MT.SaltedWater.liquid(U*4, F), ZL_IS);
+		RM.Mixer        .addRecipe2(T, 16,   16, ST.tag(0), OM.dust(MT.MgCl2      ), FL.mul(tWater, 2      ), NF, OM.dust(MT.OREMATS.Bischofite, U*1));
 		RM.Mixer        .addRecipe1(T, 16,  112, OM.dust(MT.Na2SO4, U*7), FL.mul(tWater, 30     ), NF, OM.dust(MT.OREMATS.Mirabilite, U*7));
 		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Na2CO3     ),        tWater          , NF, OM.dust(MT.OREMATS.Trona));
 		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.CaSO4      ),        tWater          , NF, OM.dust(MT.Gypsum));
@@ -62,7 +62,9 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.Mixer        .addRecipe0(T, 16,  192, FL.array(FL.mul(tWater, 3), MT.NO2.gas(U*9, T)), MT.HNO3 .liquid(U*10, F), MT.NO.gas(U*2, F));
 		
 		RM.Mixer        .addRecipe0(T, 16,  224, FL.array(FL.mul(tWater, 3), MT.H2S2O7.liquid(U*11, T)), MT.H2SO4.liquid(U*14, F), ZL_IS);
-		
+
+		RM.Mixer        .addRecipeX(T, 16, 256, ST.array(ST.tag(1), OP.dust.mat(MT.MgCl2, 3), OP.dust.mat(MT.NaOH, 2)), FL.mul(tWater, 6), MT.SaltWater.liquid(U*8, F), OP.dust.mat(MT.MgO2H2, 5));
+
 		RM.Electrolyzer .addRecipe1(T, 16, 1280, OP.dustSmall.mat(MT.NaCl, 1), FL.array(FL.mul(tWater, 3, 4, T)), FL.array(MT.Cl.gas(U8, F), MT.H.gas(3*U8, F), MT.O.gas(U8, F)), OM.dust(MT.NaOH, 3*U8));
 		RM.Electrolyzer .addRecipe1(T, 16, 5120, OP.dust     .mat(MT.NaCl, 1), FL.array(FL.mul(tWater, 3      )), FL.array(MT.Cl.gas(U2, F), MT.H.gas(3*U2, F), MT.O.gas(U2, F)), OM.dust(MT.NaOH, 3*U2));
 		RM.Electrolyzer .addRecipe1(T, 16, 1280, OP.dustSmall.mat(MT.KCl , 1), FL.array(FL.mul(tWater, 3, 4, T)), FL.array(MT.Cl.gas(U8, F), MT.H.gas(3*U8, F), MT.O.gas(U8, F)), OM.dust(MT.KOH , 3*U8));
@@ -565,9 +567,5 @@ public class Loader_Recipes_Chem implements Runnable {
 
 		//Annealed Copper
 		RM.Electrolyzer .addRecipe1(T, 16, 4096, OP.dust.mat(MT.Cu, 10), FL.array(MT.BlueVitriol.liquid(2*U,F)), FL.array(MT.BlueVitriol.liquid(2*U,F),MT.GreenVitriol.liquid(1*U10,F),MT.WhiteVitriol.liquid(1*U10,F)),OP.dust.mat(MT.AnnealedCopper,10),OM.dust(MT.CopperAnodeMud, 1*U9));
-
-		//MgO2H2
-		RM.Mixer        .addRecipe2(T, 16, 256, OP.dust.mat(MT.MgCl2, 3), OP.dust.mat(MT.NaOH, 2), FL.Water.make(2000), FL.Saltwater.make(2000), OP.dust.mat(MT.MgO2H2, 5));
-		RM.Mixer        .addRecipe2(T, 16, 256, OP.dust.mat(MT.MgCl2, 3), OP.dust.mat(MT.NaOH, 2), FL.DistW.make(2000), FL.Saltwater.make(2000), OP.dust.mat(MT.MgO2H2, 5));
 	}
 }
