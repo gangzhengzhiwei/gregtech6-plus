@@ -986,6 +986,6 @@ public class Loader_Recipes_Other implements Runnable {
 			tFluid = tMaterial.plasma(U, T); if (FL.nonzero(tFluid))      RM.Massfab.addRecipe0(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tFluid,     tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));
 		}
 
-		RM.Press.addRecipe2(T, 16, 64, IL.Pellet_Wood.get(1), OP.dust.mat(MT.Plastic, 1), IL.Circuit_Plate_PlyWood.get(1)); //This did not work in MultiItemTechnological.run method
+		RM.Press.addRecipe1(T, 16, 64, IL.Pellet_Wood.get(1), IL.Circuit_Plate_PlyWood.get(1)); //This did not work in MultiItemTechnological.run method
 	}
 }
