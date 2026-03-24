@@ -7,6 +7,7 @@ This is the most recent Changelog. It also contains some of the changes inside t
 [ADDED] Waila Compat, in WIP.
 [ADDED] zh_CN language file is in default config pack.Thanks to translation groupware.
 [ADDED] Circule Plate Plywood, only can make Circule Play (Copper).
+[CHANGED] Many multiblock machines cost less.
 [REMOVED] Large steel, invar, stainless steel, titanium crucible.
 [REMOVED] Print_Missing_I18n_Key config is removed due to unstable.
 [REMOVED] Circule Plate Empty, it is now replaced by bakelite plate.
