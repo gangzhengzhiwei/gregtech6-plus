@@ -541,9 +541,12 @@ public class Loader_Recipes_Chem implements Runnable {
 		
 		if (FL.Tropics_Water.exists())
 		RM.Drying       .addRecipe0(T, 16,11200, FL.Tropics_Water.make(7000)    , FL.DistW.make(6750), OM.dust(MT.NaCl, U4));
-		if (FL.OceanGrC.exists())
-		RM.Drying       .addRecipe0(T, 16,11200, FL.OceanGrC.make(7000)         , FL.DistW.make(6750), OM.dust(MT.NaCl, U4));
-		RM.Drying       .addRecipe0(T, 16,11200, FL.Ocean.make(7000)            , FL.DistW.make(6750), OM.dust(MT.NaCl, U4));
+		if (FL.OceanGrC.exists()) {
+			RM.Drying       .addRecipe1(T, 16, 11200, ST.tag(0), FL.OceanGrC.make(7000)         , FL.DistW.make(6750), OM.dust(MT.NaCl, U4));
+			RM.Drying       .addRecipe1(T, 16,  9600, ST.tag(1), FL.OceanGrC.make(7000)         , FL.DistW.make(6000), FL.Saltwater.make(1000));
+		}
+		RM.Drying       .addRecipe1(T, 16, 11200, ST.tag(0), FL.Ocean.make(7000)            , FL.DistW.make(6750), OM.dust(MT.NaCl, U4));
+		RM.Drying       .addRecipe1(T, 16,  9600, ST.tag(1), FL.Ocean.make(7000)            , FL.DistW.make(6000), FL.Saltwater.make(1000));
 		if (FL.Brine.exists())
 		RM.Drying       .addRecipe0(T, 16, 1600, FL.Brine.make(1000)            , FL.DistW.make( 750), OM.dust(MT.NaCl, U4));
 		RM.Drying       .addRecipe0(T, 16, 1600, MT.SaltWater.liquid(U, T)      , FL.DistW.make( 750), OM.dust(MT.NaCl, U4));
