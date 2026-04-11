@@ -1,6 +1,6 @@
 # Introduction
 
-This is a unofficial fork of GregTech-6,which aims to VoidDweller ModPack(In development)
+This is a unofficial fork of GregTech-6,which aims to expend to technology tree, with better diffculty curve.
 
 DON'T report bugs to greg or GregTech-6 forums UNLESS you sure it exists on GregTech-6
 
