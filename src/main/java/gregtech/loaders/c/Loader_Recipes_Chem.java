@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2025 GregTech-6 Team
+ * Copyright (c) 2026 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -377,7 +377,7 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Reikanol  .make(100)), FL.array(FL.Ethylene.make(20), FL.Propylene.make( 5)), ZL_IS);
 		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.BioEthanol.make(100)), FL.array(FL.Ethylene.make(20), FL.Propylene.make( 5)), ZL_IS);
 		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Petrol    .make(100)), FL.array(FL.Ethylene.make(30), FL.Propylene.make(20), FL.Benzene.make(20)), ZL_IS);
-		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Kerosine  .make(100)), FL.array(FL.Ethylene.make(30), FL.Propylene.make(20), FL.Benzene.make(10)), ZL_IS);
+		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Diesel    .make(100)), FL.array(FL.Ethylene.make(30), FL.Propylene.make(20), FL.Benzene.make(10)), ZL_IS);
 
 		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Fuel      .make(100)), FL.array(FL.Petrol.make(100), FL.Diesel.make(75)), ZL_IS);
 		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(75),  FL.Kerosine  .make(100)), FL.array(FL.Petrol.make(100), FL.Diesel.make(75)), ZL_IS);
@@ -399,6 +399,12 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.Mixer.addRecipe1(F, 16, 256, OP.dust.mat(MT.NaOH, 3), FL.array(MT.Phenol.liquid(13*U, F), MT.Formaldehyde.liquid(4*U, F)), FL.Water.make(4000), IL.Raw_Bakelite.get(13));
 		RM.Mixer.addRecipe1(F, 16, 256, OP.dust.mat(MT.KOH, 3) , FL.array(MT.Phenol.liquid(13*U, F), MT.Formaldehyde.liquid(4*U, F)), FL.Water.make(4000), IL.Raw_Bakelite.get(13));
 
+		if (FL.BioDiesel.exists() || FL.BioFuel.exists()) for (String tOil : FluidsGT.COOKING_OIL) if (FL.exists(tOil)) {
+			if (FL.Reikanol.exists())
+			RM.Mixer.addRecipe0(T, 16, 16, FL.array(FL.Reikanol  .make(8), FL.make(tOil, 8)), FL.BioDiesel.make(16, FL.BioFuel, 10), ZL_IS);
+			RM.Mixer.addRecipe0(T, 16, 16, FL.array(FL.BioEthanol.make(8), FL.make(tOil, 8)), FL.BioDiesel.make(16, FL.BioFuel, 10), ZL_IS);
+		}
+		
 		// TODO Fluidized Bed Reactor
 		RM.Mixer            .addRecipe1(T, 16,  16, OP.dust.mat(MT.MgCl2, 0), FL.array(MT.TiCl4.liquid(U1000, T), FL.Ethylene .make(100)), ZL_FS, OP.dust.mat(MT.Plastic, 1));
 		RM.Mixer            .addRecipe1(T, 16,  16, OP.dust.mat(MT.MgCl2, 0), FL.array(MT.TiCl4.liquid(U1000, T), FL.Propylene.make(100)), ZL_FS, OP.dust.mat(MT.Plastic, 1));
