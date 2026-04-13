@@ -417,6 +417,7 @@ public enum IL implements IItemContainer {
 	USB_HDD_1, USB_HDD_2, USB_HDD_3, USB_HDD_4,
 	USB_SSD_1, USB_SSD_2, USB_SSD_3, USB_SSD_4,
 	Tool_Remote_Activator,
+	Raw_Bakelite,
 	Thermometer_Quicksilver, Geiger_Counter, Geiger_Counter_Empty, Electro_Meter, Tacho_Meter,
 	Electric_Motor_ULV, Electric_Motor_LV, Electric_Motor_MV, Electric_Motor_HV, Electric_Motor_EV, Electric_Motor_IV, Electric_Motor_LuV, Electric_Motor_ZPM, Electric_Motor_UV, Electric_Motor_PUV1, Electric_Motor_PUV2, Electric_Motor_PUV3, Electric_Motor_PUV4, Electric_Motor_PUV5, Electric_Motor_OMEGA,
 	Electric_Pump_ULV, Electric_Pump_LV, Electric_Pump_MV, Electric_Pump_HV, Electric_Pump_EV, Electric_Pump_IV, Electric_Pump_LuV, Electric_Pump_ZPM, Electric_Pump_UV, Electric_Pump_PUV1, Electric_Pump_PUV2, Electric_Pump_PUV3, Electric_Pump_PUV4, Electric_Pump_PUV5, Electric_Pump_OMEGA,

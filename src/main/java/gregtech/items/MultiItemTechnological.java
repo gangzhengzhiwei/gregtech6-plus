@@ -558,7 +558,9 @@ public class MultiItemTechnological extends MultiItemRandomWithCompat {
 		IL.Circuit_Plate_Enderium          .set(addItem(30014, "Circuit Plate (Enderium)"         , "Needs Circuit Parts"                             , new OreDictItemData(MT.Enderium, U, ANY.SiO2, U, ANY.Plastic, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.ALIENIS, 1)));
 		IL.Circuit_Wire_Signalum           .set(addItem(30015, "Circuit Wiring (Signalum)"        , "Needs to be placed on an empty Circuit Plate"    , new OreDictItemData(MT.Signalum, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.POTENTIA, 1)));
 		IL.Circuit_Plate_Signalum          .set(addItem(30016, "Circuit Plate (Signalum)"         , "Needs Circuit Parts"                             , new OreDictItemData(MT.Signalum, U, ANY.SiO2, U, ANY.Plastic, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.POTENTIA, 1)));
-		
+
+		IL.Raw_Bakelite                    .set(addItem(30021, "Raw Bakelite"                     , "Use Extruder to Process"                         , new OreDictItemData(MT.Bakelite, U)));
+
 		IL.Circuit_Plate_HSLA              .set(addItem(30099, "Circuit Plate (HSLA)"             , "Needs Circuit Parts"                             , new OreDictItemData(MT.HSLA, U, MT.Au, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.MACHINA, 1), MD.RoC.mLoaded ? null : TD.Creative.HIDDEN));
 		
 		CR.shaped(IL.Circuit_Wire_Copper        .get(1), CR.DEF, "WWW", "WxW", "WWW", 'W', OP.wireFine.dat(ANY.Cu));

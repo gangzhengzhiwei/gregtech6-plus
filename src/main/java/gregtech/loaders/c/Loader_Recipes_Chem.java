@@ -376,9 +376,29 @@ public class Loader_Recipes_Chem implements Runnable {
 		if (FL.Reikanol.exists())
 		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Reikanol  .make(100)), FL.array(FL.Ethylene.make(20), FL.Propylene.make( 5)), ZL_IS);
 		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.BioEthanol.make(100)), FL.array(FL.Ethylene.make(20), FL.Propylene.make( 5)), ZL_IS);
-		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Petrol    .make(100)), FL.array(FL.Ethylene.make(30), FL.Propylene.make(20)), ZL_IS);
-		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Fuel      .make(100)), FL.array(FL.Ethylene.make(40), FL.Propylene.make(10)), ZL_IS);
-		
+		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Petrol    .make(100)), FL.array(FL.Ethylene.make(30), FL.Propylene.make(20), FL.Benzene.make(20)), ZL_IS);
+		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Kerosine  .make(100)), FL.array(FL.Ethylene.make(30), FL.Propylene.make(20), FL.Benzene.make(10)), ZL_IS);
+
+		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Fuel      .make(100)), FL.array(FL.Petrol.make(100), FL.Diesel.make(75)), ZL_IS);
+		RM.CatalyticCracking.addRecipe1(F, 16,  64, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(75),  FL.Kerosine  .make(100)), FL.array(FL.Petrol.make(100), FL.Diesel.make(75)), ZL_IS);
+
+		RM.Mixer.addRecipe0(F, 16, 64, FL.array(FL.Benzene.make(100), FL.Propylene.make(100)), FL.Cumene.make(100), ZL_IS);
+		RM.Mixer.addRecipe0(F, 16, 64, FL.array(FL.Cumene.make(100), MT.H2O2.liquid(U10, T), MT.H2SO4.liquid(U100, T)), FL.array(FL.Acetone.make(100), FL.Phenol.make(100)), ZL_IS);
+
+		RM.SteamCracking.addRecipe1(F, 16, 256, OP.dustSmall.mat(MT.C, 1), MT.Steam.gas(U4, F), MT.H.gas(U4,F), MT.CO.gas(U2, F));
+		RM.SteamCracking.addRecipe1(F, 16, 256, OP.dustSmall.mat(MT.CoalCoke, 1), MT.Steam.gas(U4, F), MT.H.gas(U4,F), MT.CO.gas(U2, F));
+		RM.SteamCracking.addRecipe1(F, 16, 256, OP.dustSmall.mat(MT.Charcoal, 2), MT.Steam.gas(U4, F), MT.H.gas(U4,F), MT.CO.gas(U2, F));
+
+		RM.SteamCracking.addRecipe1(F, 16, 256, OP.dust.mat(MT.Ni, 0), FL.array(MT.CH4.gas(U4, F), MT.Steam.gas(U4, F)), MT.CO.gas(U2, F), MT.H.gas(6*U4, F));
+		RM.SteamCracking.addRecipe1(F, 16, 256, OP.dust.mat(MT.Ni, 0), FL.array(FL.Gas_Natural.make(250), MT.Steam.gas(U4, F)), MT.CO.gas(U2, F), MT.H.gas(6*U4, F));
+
+		RM.CatalyticCracking.addRecipe1(F, 16, 256, OP.dust.mat(MT.Cu, 0), FL.array(MT.CO.gas(2*U, F), MT.H.gas(4*U, F)), FL.array(MT.Methanol.liquid(6*U, F)));
+
+		RM.CatalyticCracking.addRecipe1(F, 16, 256, OP.dust.mat(MT.Cu, 0), FL.array(MT.Methanol.liquid(6*U, F), MT.O.gas(U, F)), FL.array(MT.Formaldehyde.liquid(4*U, F), FL.Water.make(3000)));
+
+		RM.Mixer.addRecipe1(F, 16, 256, OP.dust.mat(MT.NaOH, 3), FL.array(MT.Phenol.liquid(13*U, F), MT.Formaldehyde.liquid(4*U, F)), FL.Water.make(4000), IL.Raw_Bakelite.get(13));
+		RM.Mixer.addRecipe1(F, 16, 256, OP.dust.mat(MT.KOH, 3) , FL.array(MT.Phenol.liquid(13*U, F), MT.Formaldehyde.liquid(4*U, F)), FL.Water.make(4000), IL.Raw_Bakelite.get(13));
+
 		// TODO Fluidized Bed Reactor
 		RM.Mixer            .addRecipe1(T, 16,  16, OP.dust.mat(MT.MgCl2, 0), FL.array(MT.TiCl4.liquid(U1000, T), FL.Ethylene .make(100)), ZL_FS, OP.dust.mat(MT.Plastic, 1));
 		RM.Mixer            .addRecipe1(T, 16,  16, OP.dust.mat(MT.MgCl2, 0), FL.array(MT.TiCl4.liquid(U1000, T), FL.Propylene.make(100)), ZL_FS, OP.dust.mat(MT.Plastic, 1));

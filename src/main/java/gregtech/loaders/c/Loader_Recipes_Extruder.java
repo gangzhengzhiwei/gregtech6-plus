@@ -196,7 +196,9 @@ public class Loader_Recipes_Extruder implements Runnable {
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.make(Blocks.cobblestone, 1, W), IL.Shape_SimpleEx_Gear_Small  .get(0), OP.gearGtSmall.mat(MT.Stone, 1));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 192, ST.make(Blocks.cobblestone, 6, W), IL.Shape_SimpleEx_Hammer      .get(0), OP.toolHeadHammer.mat(MT.Stone, 1));
 		
-		
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 128, IL.Shape_SimpleEx_Plate.get(0), IL.Raw_Bakelite.get(1), OP.plate.mat(MT.Bakelite, 1));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 128, IL.Shape_Extruder_Plate.get(0), IL.Raw_Bakelite.get(1), OP.plate.mat(MT.Bakelite, 1));
+
 		// Iterate over all possible Extruder Fodder that, for simplicity sake, is not too big or small.
 		ArrayListNoNulls<OreDictPrefix> tPrefixList = new ArrayListNoNulls<>();
 		for (OreDictPrefix tPrefix : OreDictPrefix.VALUES) if (tPrefix.containsAny(TD.Prefix.EXTRUDER_FODDER, TD.Prefix.INGOT_BASED, TD.Prefix.GEM_BASED, TD.Prefix.DUST_BASED) && tPrefix.mAmount >= U64 && tPrefix.mAmount <= U && U % tPrefix.mAmount == 0) tPrefixList.add(tPrefix);
