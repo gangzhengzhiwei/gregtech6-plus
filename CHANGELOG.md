@@ -1,6 +1,6 @@
 This is the most recent Changelog. It also contains some of the changes inside the >>>UPCOMING<<< Versions (most of the time). This is for 1.7.10 btw.
 
-6+1beta1: (Not released yet)
+6p1beta1:
 [FIXED] The crucible heat loss is more smooth.
 [ADDED] Large Alumina Crucible. And metal fire resistance wall.
 [ADDED] Bakelite processing line. (Cumene)
