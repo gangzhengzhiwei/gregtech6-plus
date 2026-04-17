@@ -1,11 +1,10 @@
 This is the most recent Changelog. It also contains some of the changes inside the >>>UPCOMING<<< Versions (most of the time). This is for 1.7.10 btw.
 
-6plus1.0: (Not released yet)
+6+1beta1: (Not released yet)
 [FIXED] The crucible heat loss is more smooth.
 [ADDED] Large Alumina Crucible. And metal fire resistance wall.
 [ADDED] Bakelite processing line. (Cumene)
 [ADDED] Sculpting Table, making it easier to sculpt molds.
-[ADDED] Waila Compat, in WIP.
 [ADDED] zh_CN language file is in default config pack.Thanks to translation groupware.
 [ADDED] Circule Plate Plywood, only can make Circule Play (Copper).
 [CHANGED] Many multiblock machines cost less.
